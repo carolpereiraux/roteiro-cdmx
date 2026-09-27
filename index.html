@@ -1,0 +1,1236 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Roteiro CDMX</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-alt:#FAF6F1;
+    --surface:#ffffff;
+    --ink:#211622;
+    --ink-body:#4C434A;
+    --ink-addr:#756B71;
+    --ink-faint:#9C8F97;
+    --line:#ECE3E6;
+    --marigold:#DD8A2A;
+    --name-eyebrow:#006441;
+  --name-btn-bg:#132F22;
+    --green:#006341;
+    --green-tint:#E7EDE7;
+    --red:#CE1126;
+    --red-tint:#F6E7E7;
+    --splash-bg:#0A1A13;
+    --welcome-bg:#091A12;
+    --home-hero-bg:#132F22;
+    --shadow:rgba(33,22,34,.09);
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;text-wrap:balance;margin:0;}
+  p{margin:0;}
+  button{font-family:inherit;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+
+  .app-shell{position:relative;height:100%;min-height:100vh;min-height:100dvh;overflow:hidden;background:var(--bg);}
+  .screen{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    background:var(--bg);
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    transform:translateX(0);opacity:1;
+    transition:transform .48s cubic-bezier(.22,.68,.32,1), opacity .32s ease;
+    will-change:transform;
+  }
+  .screen[hidden]{display:none;}
+  .screen.enter-right{transform:translateX(100%);opacity:.6;}
+  .screen.enter-left{transform:translateX(-28%);opacity:.6;}
+  .screen.leave-left{transform:translateX(-28%);opacity:0;}
+  .screen.leave-right{transform:translateX(100%);opacity:0;}
+  @media (prefers-reduced-motion: reduce){ .screen{transition:none;} }
+
+  .wrap{width:100%;max-width:560px;margin:0 auto;padding-inline:20px;display:flex;flex-direction:column;flex:1;min-height:100%;}
+
+  .bunting{display:flex;gap:3px;align-items:flex-start;justify-content:center;pointer-events:none;}
+  .bunting span{width:16px;height:20px;clip-path:polygon(0 0,100% 0,50% 100%);}
+  .bunting.small span{width:14px;height:18px;}
+
+  /* ============ SPLASH ============ */
+  #screen-splash{align-items:center;justify-content:center;text-align:center;background:var(--splash-bg);}
+  #screen-welcome-back{align-items:center;justify-content:center;text-align:center;background:var(--welcome-bg);text-decoration:none;}
+  .splash-inner{max-width:420px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;gap:28px;width:100%;}
+  .splash-eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:600;opacity:0;transform:translateY(10px);animation:riseIn .7s ease forwards;animation-delay:.15s;}
+  .splash-title{font-size:26px;font-weight:600;line-height:1.18;color:#ffffff;opacity:0;transform:translateY(14px);animation:riseIn .8s ease forwards;animation-delay:.4s;}
+  .splash-title-big{font-size:56px;font-weight:500;font-style:italic;line-height:1.18;color:#ffffff;opacity:0;transform:translateY(14px);animation:riseIn .8s ease forwards;animation-delay:.6s;}
+  .splash-sub{font-size:15px;color:#ffffff;line-height:1.5;opacity:0;transform:translateY(10px);animation:riseIn .8s ease forwards;animation-delay:.9s;}
+  .splash-cta{opacity:0;animation:riseIn .6s ease forwards;animation-delay:1.8s;}
+  @keyframes riseIn{to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){.splash-eyebrow,.splash-title,.splash-title-big,.splash-sub,.splash-cta{animation:none;opacity:1;transform:none;}}
+
+  .btn{appearance:none;border:none;cursor:pointer;border-radius:999px;padding:14px 28px;font-size:15px;font-weight:600;background:var(--red);color:#ffffff;transition:transform .15s ease, opacity .15s ease;}
+  .btn:active{transform:scale(.97);}
+  .btn:disabled{opacity:.35;cursor:default;}
+  .btn:disabled:active{transform:none;}
+
+  .wb-dots{display:flex;gap:6px;margin-top:8px;}
+  .wb-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);}
+  .wb-dots span:first-child{background:rgba(255,255,255,.9);}
+
+  /* ============ NAME ============ */
+  #screen-name{align-items:center;justify-content:center;}
+  .name-inner{max-width:420px;width:100%;padding:32px 20px;display:flex;flex-direction:column;gap:22px;}
+  .name-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--name-eyebrow);font-weight:700;}
+  .name-title{font-size:clamp(19px,5vw,22px);font-weight:600;color:var(--ink);}
+  .name-sub{font-size:14.5px;color:var(--ink-body);line-height:1.5;}
+  .name-field{width:100%;font-family:"Fraunces",serif;font-size:22px;padding:14px 4px;border:none;border-bottom:2px solid var(--line);background:transparent;color:var(--ink);outline:none;}
+  .name-field:focus{border-color:var(--name-eyebrow);}
+  .name-field::placeholder{color:var(--ink-faint);font-style:italic;}
+  .name-select{position:relative;}
+  .name-select-trigger{width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:"Fraunces",serif;font-weight:600;font-size:18px;padding:17px 18px;border:1px solid var(--line);border-radius:16px;background:#ffffff;color:var(--ink);cursor:pointer;text-align:left;}
+  .name-select-trigger:focus{outline:none;border-color:var(--name-eyebrow);}
+  .name-select-trigger.open{border-color:var(--name-eyebrow);}
+  .name-select-label.placeholder{color:var(--ink-faint);font-family:"Public Sans",sans-serif;font-weight:500;font-style:italic;}
+  .name-select-chevron{flex:none;color:var(--ink-faint);transition:transform .18s ease;}
+  .name-select-trigger.open .name-select-chevron{transform:rotate(180deg);}
+  .name-select-menu{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#ffffff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 32px rgba(33,22,34,.16);overflow:hidden;z-index:30;max-height:260px;overflow-y:auto;}
+  .name-select-option{display:block;width:100%;box-sizing:border-box;text-align:left;padding:14px 18px;border:none;border-bottom:1px solid #F1ECEF;background:#ffffff;font-family:"Public Sans",sans-serif;font-size:15.5px;font-weight:600;color:var(--ink);cursor:pointer;}
+  .name-select-option:last-child{border-bottom:none;}
+  .name-select-option:hover,.name-select-option:focus{background:var(--green-tint);outline:none;}
+  .name-select-option.selected{color:var(--name-eyebrow);}
+  .name-actions{display:flex;justify-content:flex-end;margin-top:6px;}
+  .name-btn{background:var(--name-btn-bg);color:#ffffff;}
+
+  /* ============ HOME ============ */
+  #screen-home .wrap{padding-bottom:48px;}
+  .home-header{display:flex;align-items:flex-end;justify-content:space-between;padding-block:22px 16px;}
+  .greeting-eyebrow{font-size:12.5px;color:var(--ink-faint);font-weight:600;}
+  .greeting-name{font-family:"Fraunces",serif;font-size:24px;font-weight:600;margin-top:2px;}
+  .rename-btn{border:none;background:none;color:var(--ink-faint);font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:6px;}
+
+  .countdown-card{background:var(--welcome-bg);border-radius:20px;padding:22px 22px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;margin-bottom:14px;}
+  .countdown-bunting{display:flex;gap:3px;}
+  .countdown-bunting span{width:16px;height:20px;clip-path:polygon(0 0,100% 0,50% 100%);}
+  .countdown-faltam{font-size:13.5px;color:#ffffff;font-weight:600;}
+  .countdown-number{font-family:"Fraunces",serif;font-size:56px;font-weight:700;line-height:1;color:#ffffff;font-variant-numeric:tabular-nums;}
+  .countdown-number.today-msg{font-size:22px;color:#ffffff;font-weight:600;}
+  .countdown-label{font-size:13.5px;color:#ffffff;font-weight:600;}
+
+  .hero-today-label{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:#9C8F97;font-weight:700;margin:0 0 12px;}
+  .hero-today{text-decoration:none;display:flex;align-items:center;gap:14px;border-radius:20px;padding:18px 20px;margin-bottom:14px;background-color:var(--home-hero-bg);}
+  .hero-today-badge{flex:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:19px;color:var(--home-hero-bg);background:#ffffff;}
+  .hero-today-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;}
+  .hero-today-date{font-size:11px;color:rgba(255,255,255,.7);font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+  .hero-today-title{font-size:16.5px;font-weight:700;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .hero-today-sub{font-size:12.5px;color:rgba(255,255,255,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .hero-today-chevron{flex:none;color:#ffffff;font-size:20px;}
+
+  .trip-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:26px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;}
+  .trip-meta-item{display:flex;flex-direction:column;gap:2px;}
+  .trip-meta-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:700;}
+  .trip-meta-value{font-size:15px;font-weight:600;color:var(--ink);}
+
+  .section-label{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:#655A63;font-weight:700;margin-bottom:12px;}
+
+  .day-list{display:flex;flex-direction:column;gap:10px;margin-bottom:30px;}
+  .day-item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 14px;cursor:pointer;transition:transform .15s ease;}
+  .day-item:active{transform:scale(.985);}
+  .day-badge{flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-weight:700;font-size:14px;background:var(--accent);color:#fff;font-variant-numeric:tabular-nums;}
+  .day-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+  .day-date{font-size:12px;color:var(--ink-faint);font-weight:600;}
+  .day-title{font-size:15px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .today-chip{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--accent);border-radius:999px;padding:4px 8px;text-transform:uppercase;}
+  .chevron{flex:none;color:var(--ink-faint);font-size:18px;}
+  .day-item.is-past{opacity:.55;}
+  .day-item.is-past .day-badge{background:var(--ink-faint);}
+  .day-item.is-past .day-title{color:var(--ink-body);}
+
+
+
+  /* ============ DAY DETAIL ============ */
+  #screen-day .wrap{padding:16px 20px 40px;}
+  .back-btn{display:flex;align-items:center;gap:6px;border:none;background:none;cursor:pointer;color:var(--ink-body);font-weight:600;font-size:14px;padding:8px 4px;width:fit-content;margin-bottom:6px;text-decoration:none;}
+  .back-btn svg{flex:none;}
+
+  .day-header{background:var(--accent-tint);border-radius:22px;padding:20px 20px 22px;margin-top:10px;margin-bottom:26px;}
+  .day-header-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .day-header .day-badge{width:42px;height:42px;font-size:15px;}
+  .day-header-date{font-size:12.5px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  .day-header-title{font-size:clamp(21px,5.5vw,25px);font-weight:600;margin-top:2px;}
+  .day-header-tag{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--surface);padding:5px 11px;border-radius:999px;}
+  .day-header-sub{margin-top:12px;font-size:14.5px;color:var(--ink-body);line-height:1.55;}
+
+  .timeline{display:flex;flex-direction:column;}
+  .t-item{display:flex;gap:14px;}
+  .t-marker{flex:none;width:16px;display:flex;flex-direction:column;align-items:center;}
+  .t-dot{flex:none;width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:5px;box-shadow:0 0 0 4px var(--accent-glow);}
+  .t-line{flex:1;width:2px;background:var(--line);margin:4px 0;border-radius:1px;}
+  .t-item:last-child .t-line{display:none;}
+  .t-card{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:14px;box-shadow:0 1px 2px var(--shadow);}
+  .t-time{display:inline-block;font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-glow);padding:3px 10px;border-radius:999px;margin-bottom:8px;font-variant-numeric:tabular-nums;}
+  .t-activity{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.4;}
+  .t-addr{display:flex;align-items:flex-start;gap:5px;margin-top:6px;}
+  .t-addr span{font-size:12.5px;color:var(--ink-addr);font-weight:600;line-height:1.4;}
+  .t-detail{margin-top:5px;font-size:13.5px;color:var(--ink-body);line-height:1.55;}
+  .t-ticket,.t-info{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:700;padding:5px 11px 5px 8px;border-radius:999px;}
+  .t-ticket{color:#1B7A4C;background:rgba(27,122,76,.12);}
+  .t-info{color:#655A63;background:rgba(101,90,99,.13);}
+  .t-ticket svg,.t-info svg{flex:none;}
+
+  .callout{margin-top:6px;border-left:3px solid var(--green);border-radius:0 14px 14px 0;padding:16px 18px;background-color:#F7F9F8;}
+  .callout-title{font-size:12.5px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+  .callout ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+  .callout li{font-size:13.5px;color:var(--ink-body);line-height:1.55;}
+
+  @media (min-width:640px){ .wrap{padding-inline:32px;} .countdown-number{font-size:64px;} }
+</style>
+</head>
+<body>
+
+<div class="app-shell" id="appShell">
+
+  <!-- ================= SPLASH (primeiro acesso) ================= -->
+  <section class="screen" id="screen-splash">
+    <div class="splash-inner">
+      <div class="bunting" aria-hidden="true">
+        <span style="background:#006341"></span><span style="background:#ffffff"></span><span style="background:#CE1126"></span><span style="background:#006341"></span><span style="background:#ffffff"></span><span style="background:#CE1126"></span><span style="background:#006341"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <h1 class="splash-title">Bienvenido a su viaje a</h1>
+        <h1 class="splash-title-big">Ciudad de México</h1>
+      </div>
+      <p class="splash-sub">25.10.2025 a 05.11.2026</p>
+      <div class="splash-cta">
+        <button class="btn" id="splashContinue" type="button">Começar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WELCOME BACK (visitas seguintes) ================= -->
+  <section class="screen" id="screen-welcome-back" hidden>
+    <a href="#" id="welcomeBackLink" class="splash-inner" style="text-decoration:none;">
+      <div class="bunting" aria-hidden="true">
+        <span style="background:#006341"></span><span style="background:#ffffff"></span><span style="background:#CE1126"></span><span style="background:#006341"></span><span style="background:#ffffff"></span><span style="background:#CE1126"></span><span style="background:#006341"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <p class="splash-eyebrow" style="animation-delay:.1s;">Roteiro de viagem</p>
+        <h1 class="splash-title-big" style="animation-delay:.25s;">Ciudad de México</h1>
+      </div>
+      <p class="splash-sub" id="welcomeBackSub" style="animation-delay:.5s;">Que bom que voltou!</p>
+      <div class="wb-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    </a>
+  </section>
+
+  <!-- ================= NAME ================= -->
+  <section class="screen" id="screen-name" hidden>
+    <div class="wrap" style="justify-content:center;">
+      <form class="name-inner" id="nameForm">
+        <p class="name-eyebrow">Antes de começar</p>
+        <h2 class="name-title">Selecione seu nome na lista</h2>
+        <p class="name-sub">Assim você verá seu roteiro personalizado</p>
+        <div class="name-select" id="nameSelect">
+          <button type="button" class="name-select-trigger" id="nameTrigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="name-select-label placeholder" id="nameTriggerLabel">Selecione seu nome</span>
+            <svg class="name-select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="name-select-menu" id="nameMenu" role="listbox" hidden>
+            <button type="button" class="name-select-option" role="option" data-value="carou">carou</button>
+            <button type="button" class="name-select-option" role="option" data-value="Cleire">Cleire</button>
+            <button type="button" class="name-select-option" role="option" data-value="Marlene">Marlene</button>
+            <button type="button" class="name-select-option" role="option" data-value="Sandro">Sandro</button>
+            <button type="button" class="name-select-option" role="option" data-value="Valter">Valter</button>
+            <button type="button" class="name-select-option" role="option" data-value="Vine">Vine</button>
+          </div>
+          <input type="hidden" id="nameInput" value="">
+        </div>
+        <div class="name-actions">
+          <button class="btn name-btn" id="nameContinue" type="submit" disabled>Continuar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= HOME ================= -->
+  <section class="screen" id="screen-home" hidden>
+    <div class="wrap">
+      <div class="home-header">
+        <div>
+          <p class="greeting-eyebrow" id="greetingEyebrow">Olá,</p>
+          <h1 class="greeting-name" id="greetingName">Viajante</h1>
+        </div>
+        <button class="rename-btn" id="renameBtn" type="button">trocar nome</button>
+      </div>
+
+      <div id="heroArea"></div>
+
+      <div class="trip-card">
+        <div class="trip-meta-item"><span class="trip-meta-label">Início</span><span class="trip-meta-value" id="tripStartLabel">25 de outubro</span></div>
+        <div class="trip-meta-item"><span class="trip-meta-label">Final</span><span class="trip-meta-value" id="tripEndLabel">4 de novembro</span></div>
+        <div class="trip-meta-item"><span class="trip-meta-label">Destino</span><span class="trip-meta-value">Ciudad de México</span></div>
+        <div class="trip-meta-item"><span class="trip-meta-label">Dias de viagem</span><span class="trip-meta-value" id="tripDaysLabel">11</span></div>
+      </div>
+
+      <p class="section-label">Seu roteiro</p>
+      <div class="day-list" id="dayList"></div>
+    </div>
+  </section>
+
+  <!-- ================= DAY DETAIL ================= -->
+  <section class="screen" id="screen-day" hidden>
+    <div class="wrap">
+      <button class="back-btn" id="backBtn" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Voltar
+      </button>
+      <div id="dayDetailContent"></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "cdmx_roteiro_name";
+  var DEFAULT_START = new Date(2026,9,25);
+  var DEFAULT_END   = new Date(2026,10,4);
+  var CAROU_START = new Date(2026,9,16);
+  var CAROU_END   = new Date(2026,10,5);
+
+  var GREEN = "#006341", GREEN_TINT = "#E7EDE7", GREEN_GLOW = "rgba(0,99,65,0.13)";
+  var RED = "#CE1126", RED_TINT = "#F6E7E7", RED_GLOW = "rgba(206,17,38,0.13)";
+
+  var TICKET_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z"/><path d="M13 5v2M13 17v2M13 10.5v3"/></svg>';
+  var PIN_ICON = function(color){ return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'; };
+
+  var DEFAULT_DAYS = [
+    {
+      id:1, iso:"2026-10-25", weekday:"Domingo", dateLabel:"25 de outubro",
+      homeTitle:"Chegada no México", homeSub:"Dia de viagem e ajuste",
+      title:"Chegada no México", accent:"green",
+      subtitle:"Dia de viagem e ajuste — sem compromisso marcado, pra chegar com calma antes do roteiro começar amanhã.",
+      schedule:[
+        {time:"15h", activity:"Chegada e transfer para a hospedagem", detail:"Saída do aeroporto prevista para 16h."},
+        {time:"Tarde/noite", activity:"Descanso, check-in, jantar tranquilo na hospedagem", detail:"Sem roteiro fixo, bom momento pra se situar no bairro, ir ao mercado..."}
+      ],
+      notes:["Primeiro contato com o fuso e altitude, vale manter o dia bem leve, já que amanhã o roteiro já começa em Coyoacán."]
+    },
+    {
+      id:2, iso:"2026-10-26", weekday:"Segunda-feira", dateLabel:"26 de outubro",
+      homeTitle:"Museu Casa Kahlo (Casa Vermelha) + Coyoacán", homeSub:"Tudo em Coyoacán, sem carro",
+      title:"Museu Casa Kahlo (Casa Vermelha) + Coyoacán", accent:"red",
+      subtitle:"Tudo em Coyoacán, a uns 10min a pé um do outro — dá pra fazer o dia inteiro sem carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"9h52", activity:"Museu Casa Kahlo (Casa Vermelha)", address:"Aguayo 54, Del Carmen, Coyoacán", detail:"É a casa onde a família Kahlo morava, onde Frida cresceu.", ticket:"Ingressos comprados"},
+        {time:"11h30", activity:"Caminhada até o Mercado de Coyoacán / Jardín Centenario", detail:"~10min a pé"},
+        {time:"12h", activity:"Mercado de Coyoacán", address:"Ignacio Allende s/n, Del Carmen, Coyoacán", detail:"Artesanato, comida típica, tostadas famosas"},
+        {time:"13h", activity:"Almoço no mercado ou nas ruas do Jardín Centenario"},
+        {time:"Tarde", activity:"Passeio pelas ruas coloniais, Jardín Centenario, Plaza Hidalgo"},
+        {time:"Final do dia", activity:"Noite livre", detail:"Retorno para hospedagem e jantar livre"}
+      ],
+      notes:["Amanhã o dia começa cedo e pode ser bem cansativo. Aproveite para descansar a noite!"]
+    },
+    {
+      id:3, iso:"2026-10-27", weekday:"Terça-feira", dateLabel:"27 de outubro",
+      homeTitle:"Teotihuacán + Basílica de Guadalupe", homeSub:"Dia inteiro com guia",
+      title:"Teotihuacán + Basílica de Guadalupe", accent:"green", tag:"Dia inteiro com guia",
+      subtitle:"Dia com guia contratado — o guia cuida do transporte e do roteiro; os horários abaixo são uma estimativa típica desse tipo de tour.",
+      schedule:[
+        {time:"8h", activity:"Saída de casa para encontrar o guia", address:"Decatlhon", detail:"Van/carro do tour"},
+        {time:"~9h – 13h", activity:"Zona Arqueológica de Teotihuacán", detail:"Pirâmide do Sol, Pirâmide da Lua, Calçada dos Mortos."},
+        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia"},
+        {time:"~15h – 16h", activity:"Basílica de Guadalupe", detail:"Fica no caminho de volta à cidade, entre Teotihuacán e o Centro, é o Santuário mais visitado do México."},
+        {time:"~16h – 17h", activity:"Volta para a Decatlhon", detail:"Mesma localização de encontro do início do dia"},
+        {time:"Final do dia", activity:"Volta para a hospedagem", detail:"Jantar livre e descanso"}
+      ]
+    },
+    {
+      id:4, iso:"2026-10-28", weekday:"Quarta-feira", dateLabel:"28 de outubro",
+      homeTitle:"Castillo de Chapultepec + Museu de Antropologia", homeSub:"Dentro do Bosque de Chapultepec",
+      title:"Castillo de Chapultepec + Museu de Antropologia", accent:"red",
+      subtitle:"Os dois ficam dentro do Bosque de Chapultepec, a uns 15–20min a pé um do outro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h – 11h30", activity:"Castillo de Chapultepec", detail:"Foi a residência do imperador Maximiliano e depois de presidentes mexicanos. Reserve pelo menos 1h30 de tour.", info:"Ingressos no local e em dinheiro"},
+        {time:"12h", activity:"Caminhada até o Museu de Antropologia", detail:"~15–20min a pé descendo pelo parque"},
+        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar."},
+        {time:"14h – 17h", activity:"Museu Nacional de Antropologia", detail:"Maior e mais importante museu do México — acervo arqueológico e etnográfico de todas as culturas do país (inclui a Pedra do Sol/calendário asteca).", info:"Ingressos $210 - Compra na hora"},
+        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa..."},
+        {time:"Noite", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:5, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
+      homeTitle:"Xochimilco + Ikea e compras", homeSub:"Trajinera de manhã, IKEA à tarde",
+      title:"Xochimilco + Ikea e compras", accent:"green",
+      subtitle:"Manhã de passeio de trajinera em Xochimilco, com almoço por lá ou já na IKEA — a tarde segue como antes, para compras.",
+      schedule:[
+        {time:"8h00", activity:"Saída de casa", detail:"Xochimilco fica mais longe da hospedagem — calculem 45–60min de carro"},
+        {time:"9h00", activity:"Passeio de trajinera em Xochimilco", detail:"Embarcadouro de Nativitas ou Cuemanco. Reserve pelo menos 2h de passeio, ideal para a primeira visita."},
+        {time:"11h30", activity:"Saída para IKEA CDMX", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"40–50min de carro — fica no bairro Moctezuma/Oceanía, zona leste."},
+        {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
+        {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
+        {time:"Final do dia", activity:"Volta para a hospedagem"},
+        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem."}
+      ]
+    },
+    {
+      id:6, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
+      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
+      title:"Centro Histórico", accent:"red",
+      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso."},
+        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
+        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)"},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora"},
+        {time:"~15h", activity:"Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 17h30.", info:"Ingressos ~$85 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir."},
+        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:7, iso:"2026-10-31", weekday:"Sábado", dateLabel:"31 de outubro",
+      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"12h — horário e rota oficiais",
+      title:"Grande Desfile de Día de Muertos", accent:"green",
+      subtitle:"É um desfile espetacular com carros alegóricos, caveiras gigantes, bonecos monumentais, acrobatas e milhares de participantes fantasiados.",
+      schedule:[
+        {time:"Manhã", activity:"Manhã livre", detail:"Se preferirem, fiquem por perto antes do desfile. Podem ir à feira de Coyoacán que fica mais longe da rota. Calculem pelo menos 40–50min de deslocamento até lá."},
+        {time:"10h30", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
+        {time:"11h", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
+        {time:"A partir das 12h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
+      ],
+      notes:["Se decidirem pela feira em Coyoacán de manhã, o deslocamento até a rota do desfile é o ponto de atenção — são bairros bem distantes um do outro."]
+    },
+    {
+      id:8, iso:"2026-11-01", weekday:"Domingo", dateLabel:"1 de novembro",
+      homeTitle:"Feira de miniaturas + Coyoacán", homeSub:"Bairros diferentes, ~25–30min",
+      title:"Feira de miniaturas + Coyoacán", accent:"red",
+      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, oferendas de Día de Muertos.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
+        {time:"13h", activity:"Almoço no Centro"},
+        {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
+        {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
+        {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:9, iso:"2026-11-02", weekday:"Segunda-feira", dateLabel:"2 de novembro",
+      homeTitle:"Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
+      title:"Panteón de San Gregorio", accent:"green",
+      subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
+      schedule:[
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer..."},
+        {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
+        {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
+        {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
+        {time:"21h", activity:"Volta para a hospedagem", detail:"Trajeto de volta pode ser mais longo por causa do movimento."}
+      ]
+    },
+    {
+      id:10, iso:"2026-11-03", weekday:"Terça-feira", dateLabel:"3 de novembro",
+      homeTitle:"Lucha Libre — Arena México (CMLL)", homeSub:"19h30",
+      title:"Lucha Libre — Arena México (CMLL)", accent:"red",
+      subtitle:"Tipo de luta livre profissional originária do México, caracterizada por acrobacias, golpes aéreos e o uso marcante de máscaras coloridas.",
+      schedule:[
+        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro."},
+        {time:"18h30", activity:"Saída de casa"},
+        {time:"19h30", activity:"Lucha Libre — Arena México (CMLL)", address:"Rua Dr. Lavista 189, Doctores", detail:"Início as 19h30.", ticket:"Ingressos comprados"}
+      ]
+    },
+    {
+      id:11, iso:"2026-11-04", weekday:"Quarta-feira", dateLabel:"4 de novembro",
+      homeTitle:"Soumaya + Retorno Carou e Vine", homeSub:"Dia livre — opcional após 15h",
+      title:"Soumaya + Retorno Carou e Vine", accent:"green",
+      subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h.",
+      schedule:[
+        {time:"Dia livre", activity:"Manhã e início da tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em algum lugar para conhecer outros pontos."},
+        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho."}
+      ]
+    }
+  ];
+
+  var CAROU_DAYS = [
+    {
+      id:1, iso:"2026-10-16", weekday:"Sexta-feira", dateLabel:"16 de outubro",
+      homeTitle:"Chegada no México", homeSub:"Chegada às 15h, direto pra acomodação",
+      title:"Chegada no México", accent:"green",
+      subtitle:"Dia de chegada — sem compromisso marcado além do check-in, pra descansar da viagem antes de começar a explorar.",
+      schedule:[
+        {time:"15h", activity:"Chegada em CDMX", detail:"Desembarque e retirada de bagagem."},
+        {time:"Após a chegada", activity:"Transfer para a acomodação", detail:"Direto do aeroporto para a hospedagem."},
+        {time:"Tarde/noite", activity:"Check-in e descanso", detail:"Sem roteiro fixo — bom momento pra se situar no bairro."}
+      ]
+    },
+    {
+      id:2, iso:"2026-10-17", weekday:"Sábado", dateLabel:"17 de outubro",
+      homeTitle:"Desfile de Alebrijes Monumentales", homeSub:"Evento público de rua, gratuito",
+      title:"Desfile de Alebrijes Monumentales", accent:"red",
+      subtitle:"Desfile de esculturas fantásticas e coloridas pelas ruas do centro — evento público de rua, gratuito e aberto pra todos.",
+      schedule:[
+        {time:"12h", activity:"Desfile de Alebrijes Monumentales", detail:"Sai do Zócalo capitalino rumo ao Ángel de la Independencia. O trajeto passa pela Rua 5 de Mayo, segue pela Av. Juárez e termina no Paseo de la Reforma. Depois do desfile, as esculturas ficam expostas até domingo, dia 8 de novembro.", info:"Evento público de rua, gratuito"}
+      ]
+    },
+    {
+      id:3, iso:"2026-10-18", weekday:"Domingo", dateLabel:"18 de outubro",
+      homeTitle:"Dia livre", homeSub:"Sem compromissos marcados",
+      title:"Dia livre", accent:"green",
+      subtitle:"Dia sem compromisso no roteiro — aproveitem pra descansar, passear por conta própria ou conhecer algo que tenham vontade.",
+      schedule:[
+        {time:"Dia todo", activity:"Sem compromissos marcados", detail:"Fiquem à vontade pra descansar, passear ou conhecer algum lugar por conta própria."}
+      ]
+    },
+    {
+      id:4, iso:"2026-10-19", weekday:"Segunda-feira", dateLabel:"19 de outubro",
+      homeTitle:"Dia livre", homeSub:"Sem compromissos marcados",
+      title:"Dia livre", accent:"red",
+      subtitle:"Dia sem compromisso no roteiro — aproveitem pra descansar, passear por conta própria ou conhecer algo que tenham vontade.",
+      schedule:[
+        {time:"Dia todo", activity:"Sem compromissos marcados", detail:"Fiquem à vontade pra descansar, passear ou conhecer algum lugar por conta própria."}
+      ]
+    },
+    {
+      id:5, iso:"2026-10-20", weekday:"Terça-feira", dateLabel:"20 de outubro",
+      homeTitle:"Espetáculo Martha Graham", homeSub:"Palacio de Bellas Artes — 16h",
+      title:"Espetáculo Martha Graham", accent:"green",
+      subtitle:"Apresentação da companhia de dança contemporânea Martha Graham, no icônico Palacio de Bellas Artes.",
+      schedule:[
+        {time:"16h", activity:"Espetáculo Martha Graham", address:"Palacio de Bellas Artes", ticket:"Ingressos comprados"}
+      ]
+    },
+    {
+      id:6, iso:"2026-10-21", weekday:"Quarta-feira", dateLabel:"21 de outubro",
+      homeTitle:"Casa Vermelha — Frida", homeSub:"Ingresso comprado",
+      title:"Casa Vermelha — Frida", accent:"red",
+      subtitle:"Visita à Casa Vermelha (Museu Casa Kahlo), onde Frida Kahlo nasceu e viveu.",
+      schedule:[
+        {time:"A confirmar", activity:"Museu Casa Kahlo (Casa Vermelha)", address:"Aguayo 54, Del Carmen, Coyoacán", detail:"Confirmar horário de entrada mais perto da data.", ticket:"Ingresso comprado"}
+      ]
+    },
+    {
+      id:7, iso:"2026-10-22", weekday:"Quinta-feira", dateLabel:"22 de outubro",
+      homeTitle:"Dia livre", homeSub:"Sem compromissos marcados",
+      title:"Dia livre", accent:"green",
+      subtitle:"Dia sem compromisso no roteiro — aproveitem pra descansar, passear por conta própria ou conhecer algo que tenham vontade.",
+      schedule:[
+        {time:"Dia todo", activity:"Sem compromissos marcados", detail:"Fiquem à vontade pra descansar, passear ou conhecer algum lugar por conta própria."}
+      ]
+    },
+    {
+      id:8, iso:"2026-10-23", weekday:"Sexta-feira", dateLabel:"23 de outubro",
+      homeTitle:"Dia livre", homeSub:"Sem compromissos marcados",
+      title:"Dia livre", accent:"red",
+      subtitle:"Dia sem compromisso no roteiro — aproveitem pra descansar, passear por conta própria ou conhecer algo que tenham vontade.",
+      schedule:[
+        {time:"Dia todo", activity:"Sem compromissos marcados", detail:"Fiquem à vontade pra descansar, passear ou conhecer algum lugar por conta própria."}
+      ]
+    },
+    {
+      id:9, iso:"2026-10-24", weekday:"Sábado", dateLabel:"24 de outubro",
+      homeTitle:"Festival de Café, Chocolate y Pan de Muerto", homeSub:"Gratuito — Teatro Glaxo, Tec de Monterrey",
+      title:"Festival de Café, Chocolate y Pan de Muerto", accent:"green",
+      subtitle:"Festival gratuito de café, chocolate e pan de muerto, no campus do Tec de Monterrey em CDMX.",
+      schedule:[
+        {time:"A confirmar", activity:"Festival de Café, Chocolate y Pan de Muerto", address:"Teatro Glaxo, Tec de Monterrey (campus CDMX)", detail:"Confirmar horário de funcionamento mais perto da data.", info:"Gratuito"}
+      ]
+    },
+    {
+      id:10, iso:"2026-10-25", weekday:"Domingo", dateLabel:"25 de outubro",
+      homeTitle:"Desfile de Catrinas", homeSub:"12h — depois, aeroporto às 16h",
+      title:"Desfile de Catrinas", accent:"red",
+      subtitle:"Desfile tradicional de Catrinas, saindo do Ángel de la Independencia até o Zócalo — evento público de rua, gratuito. Depois é hora de buscar Vine, Marlene e Valter no aeroporto.",
+      schedule:[
+        {time:"12h", activity:"Desfile de Catrinas", detail:"Sai do Ángel de la Independencia e segue até o Zócalo.", info:"Evento público de rua, gratuito"},
+        {time:"16h", activity:"Buscar Vine, Marlene e Valter no aeroporto", detail:"Direto no aeroporto."}
+      ]
+    },
+    {
+      id:11, iso:"2026-10-26", weekday:"Segunda-feira", dateLabel:"26 de outubro",
+      homeTitle:"Museu Casa Kahlo (Casa Vermelha) + Coyoacán", homeSub:"Tudo em Coyoacán, sem carro",
+      title:"Museu Casa Kahlo (Casa Vermelha) + Coyoacán", accent:"red",
+      subtitle:"Tudo em Coyoacán, a uns 10min a pé um do outro — dá pra fazer o dia inteiro sem carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"9h52", activity:"Museu Casa Kahlo (Casa Vermelha)", address:"Aguayo 54, Del Carmen, Coyoacán", detail:"É a casa onde a família Kahlo morava, onde Frida cresceu.", ticket:"Ingressos comprados"},
+        {time:"11h30", activity:"Caminhada até o Mercado de Coyoacán / Jardín Centenario", detail:"~10min a pé"},
+        {time:"12h", activity:"Mercado de Coyoacán", address:"Ignacio Allende s/n, Del Carmen, Coyoacán", detail:"Artesanato, comida típica, tostadas famosas"},
+        {time:"13h", activity:"Almoço no mercado ou nas ruas do Jardín Centenario"},
+        {time:"Tarde", activity:"Passeio pelas ruas coloniais, Jardín Centenario, Plaza Hidalgo"},
+        {time:"Final do dia", activity:"Noite livre", detail:"Retorno para hospedagem e jantar livre"}
+      ],
+      notes:["Amanhã o dia começa cedo e pode ser bem cansativo. Aproveite para descansar a noite!"]
+    },
+    {
+      id:12, iso:"2026-10-27", weekday:"Terça-feira", dateLabel:"27 de outubro",
+      homeTitle:"Teotihuacán + Basílica de Guadalupe", homeSub:"Dia inteiro com guia",
+      title:"Teotihuacán + Basílica de Guadalupe", accent:"green", tag:"Dia inteiro com guia",
+      subtitle:"Dia com guia contratado — o guia cuida do transporte e do roteiro; os horários abaixo são uma estimativa típica desse tipo de tour.",
+      schedule:[
+        {time:"8h", activity:"Saída de casa para encontrar o guia", address:"Decatlhon", detail:"Van/carro do tour"},
+        {time:"~9h – 13h", activity:"Zona Arqueológica de Teotihuacán", detail:"Pirâmide do Sol, Pirâmide da Lua, Calçada dos Mortos."},
+        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia"},
+        {time:"~15h – 16h", activity:"Basílica de Guadalupe", detail:"Fica no caminho de volta à cidade, entre Teotihuacán e o Centro, é o Santuário mais visitado do México."},
+        {time:"~16h – 17h", activity:"Volta para a Decatlhon", detail:"Mesma localização de encontro do início do dia"},
+        {time:"Final do dia", activity:"Volta para a hospedagem", detail:"Jantar livre e descanso"}
+      ]
+    },
+    {
+      id:13, iso:"2026-10-28", weekday:"Quarta-feira", dateLabel:"28 de outubro",
+      homeTitle:"Castillo de Chapultepec + Museu de Antropologia", homeSub:"Dentro do Bosque de Chapultepec",
+      title:"Castillo de Chapultepec + Museu de Antropologia", accent:"red",
+      subtitle:"Os dois ficam dentro do Bosque de Chapultepec, a uns 15–20min a pé um do outro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h – 11h30", activity:"Castillo de Chapultepec", detail:"Foi a residência do imperador Maximiliano e depois de presidentes mexicanos. Reserve pelo menos 1h30 de tour.", info:"Ingressos no local e em dinheiro"},
+        {time:"12h", activity:"Caminhada até o Museu de Antropologia", detail:"~15–20min a pé descendo pelo parque"},
+        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar."},
+        {time:"14h – 17h", activity:"Museu Nacional de Antropologia", detail:"Maior e mais importante museu do México — acervo arqueológico e etnográfico de todas as culturas do país (inclui a Pedra do Sol/calendário asteca).", info:"Ingressos $210 - Compra na hora"},
+        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa..."},
+        {time:"Noite", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:14, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
+      homeTitle:"Xochimilco + Ikea e compras", homeSub:"Trajinera de manhã, IKEA à tarde",
+      title:"Xochimilco + Ikea e compras", accent:"green",
+      subtitle:"Manhã de passeio de trajinera em Xochimilco, com almoço por lá ou já na IKEA — a tarde segue como antes, para compras.",
+      schedule:[
+        {time:"8h00", activity:"Saída de casa", detail:"Xochimilco fica mais longe da hospedagem — calculem 45–60min de carro"},
+        {time:"9h00", activity:"Passeio de trajinera em Xochimilco", detail:"Embarcadouro de Nativitas ou Cuemanco. Reserve pelo menos 2h de passeio, ideal para a primeira visita."},
+        {time:"11h30", activity:"Saída para IKEA CDMX", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"40–50min de carro — fica no bairro Moctezuma/Oceanía, zona leste."},
+        {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
+        {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
+        {time:"Final do dia", activity:"Volta para a hospedagem"},
+        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem."}
+      ]
+    },
+    {
+      id:15, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
+      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
+      title:"Centro Histórico", accent:"red",
+      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso."},
+        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
+        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)"},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora"},
+        {time:"~15h", activity:"Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 17h30.", info:"Ingressos ~$85 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir."},
+        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:16, iso:"2026-10-31", weekday:"Sábado", dateLabel:"31 de outubro",
+      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"12h — horário e rota oficiais",
+      title:"Grande Desfile de Día de Muertos", accent:"green",
+      subtitle:"É um desfile espetacular com carros alegóricos, caveiras gigantes, bonecos monumentais, acrobatas e milhares de participantes fantasiados.",
+      schedule:[
+        {time:"Manhã", activity:"Manhã livre", detail:"Se preferirem, fiquem por perto antes do desfile. Podem ir à feira de Coyoacán que fica mais longe da rota. Calculem pelo menos 40–50min de deslocamento até lá."},
+        {time:"10h30", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
+        {time:"11h", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
+        {time:"A partir das 12h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
+      ],
+      notes:["Se decidirem pela feira em Coyoacán de manhã, o deslocamento até a rota do desfile é o ponto de atenção — são bairros bem distantes um do outro."]
+    },
+    {
+      id:17, iso:"2026-11-01", weekday:"Domingo", dateLabel:"1 de novembro",
+      homeTitle:"Feira de miniaturas + Coyoacán", homeSub:"Bairros diferentes, ~25–30min",
+      title:"Feira de miniaturas + Coyoacán", accent:"red",
+      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, oferendas de Día de Muertos.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
+        {time:"13h", activity:"Almoço no Centro"},
+        {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
+        {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
+        {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
+      ]
+    },
+    {
+      id:18, iso:"2026-11-02", weekday:"Segunda-feira", dateLabel:"2 de novembro",
+      homeTitle:"Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
+      title:"Panteón de San Gregorio", accent:"green",
+      subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
+      schedule:[
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer..."},
+        {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
+        {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
+        {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
+        {time:"21h", activity:"Volta para a hospedagem", detail:"Trajeto de volta pode ser mais longo por causa do movimento."}
+      ]
+    },
+    {
+      id:19, iso:"2026-11-03", weekday:"Terça-feira", dateLabel:"3 de novembro",
+      homeTitle:"Lucha Libre — Arena México (CMLL)", homeSub:"19h30",
+      title:"Lucha Libre — Arena México (CMLL)", accent:"red",
+      subtitle:"Tipo de luta livre profissional originária do México, caracterizada por acrobacias, golpes aéreos e o uso marcante de máscaras coloridas.",
+      schedule:[
+        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro."},
+        {time:"18h30", activity:"Saída de casa"},
+        {time:"19h30", activity:"Lucha Libre — Arena México (CMLL)", address:"Rua Dr. Lavista 189, Doctores", detail:"Início as 19h30.", ticket:"Ingressos comprados"}
+      ]
+    },
+    {
+      id:20, iso:"2026-11-04", weekday:"Quarta-feira", dateLabel:"4 de novembro",
+      homeTitle:"Soumaya + Retorno Carou e Vine", homeSub:"Dia livre — depois, aeroporto às 22h",
+      title:"Soumaya + Retorno Carou e Vine", accent:"green",
+      subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h — à noite é hora de ir pro aeroporto.",
+      schedule:[
+        {time:"Dia livre", activity:"Manhã e início da tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em algum lugar para conhecer outros pontos."},
+        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho."},
+        {time:"22h", activity:"Saída para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."}
+      ]
+    },
+    {
+      id:21, iso:"2026-11-05", weekday:"Quinta-feira", dateLabel:"5 de novembro",
+      homeTitle:"Volta para casa", homeSub:"Voo às 01h da madrugada",
+      title:"Volta para casa", accent:"red",
+      subtitle:"Voo de volta saindo de CDMX na madrugada — encerrando a viagem.",
+      schedule:[
+        {time:"01h", activity:"Voo de volta para casa", detail:"Partindo de CDMX."}
+      ]
+    }
+  ];
+
+  function withDayAddition(baseDays, dayId, extraSchedule, overrides){
+    return baseDays.map(function(d){
+      if(d.id !== dayId) return d;
+      var copy = {};
+      for(var k in d){ copy[k] = d[k]; }
+      copy.schedule = d.schedule.concat(extraSchedule);
+      if(overrides){ for(var k2 in overrides){ copy[k2] = overrides[k2]; } }
+      return copy;
+    });
+  }
+
+  var VINE_DAYS = withDayAddition(DEFAULT_DAYS, 11, [
+    {time:"22h", activity:"Saída para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."}
+  ], {
+    homeSub:"Dia livre — depois, aeroporto às 22h",
+    subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h — à noite é hora de ir pro aeroporto."
+  }).concat([
+    {
+      id:12, iso:"2026-11-05", weekday:"Quinta-feira", dateLabel:"5 de novembro",
+      homeTitle:"Volta para casa", homeSub:"Voo às 01h da madrugada",
+      title:"Volta para casa", accent:"red",
+      subtitle:"Voo de volta saindo de CDMX na madrugada — encerrando a viagem.",
+      schedule:[
+        {time:"01h", activity:"Voo de volta para casa", detail:"Partindo de CDMX."}
+      ]
+    }
+  ]);
+
+  // Marlene e Valter seguem o roteiro padrão, mas na noite de 04/11 se despedem de
+  // carou e vine (que seguem para o aeroporto) e no dia seguinte, 05/11, é a vez
+  // deles voltarem para casa — voo às 19h, então saem de casa às 15h.
+  var MV_DAYS = withDayAddition(DEFAULT_DAYS, 11, [
+    {time:"21h", activity:"Se despedir de carou e vine", detail:"Eles seguem para o aeroporto — voo de volta é 01h da madrugada."}
+  ], {
+    homeSub:"Dia livre — depois, se despedir de carou e vine"
+  }).concat([
+    {
+      id:12, iso:"2026-11-05", weekday:"Quinta-feira", dateLabel:"5 de novembro",
+      homeTitle:"Volta para casa", homeSub:"Voo às 19h",
+      title:"Volta para casa", accent:"red",
+      subtitle:"Hoje é a vez de Marlene e Valter voltarem para casa — voo às 19h.",
+      schedule:[
+        {time:"15h", activity:"Saída de casa para o aeroporto", detail:"Cleire e Sandro levam vocês até lá."},
+        {time:"16h", activity:"Estar no aeroporto", detail:"Voo sai às 19h — chegar com antecedência."},
+        {time:"19h", activity:"Voo de volta para casa", detail:"Partindo de CDMX."}
+      ]
+    }
+  ]);
+
+  function renumberDays(days, offset){
+    return days.map(function(d){
+      var copy = {};
+      for(var k in d){ copy[k] = d[k]; }
+      copy.id = d.id + offset;
+      return copy;
+    });
+  }
+
+  // Carou, Cleire e Sandro fazem o mesmo dia 25/10 juntos: desfile às 12h e depois
+  // buscar o resto do grupo no aeroporto às 16h — reaproveita o dia 10 do carou.
+  var AIRPORT_PICKUP_DAY = CAROU_DAYS[9];
+
+  // Cleire e Sandro chegam junto com o carou (16/10) e seguem o mesmo roteiro extra até
+  // o dia 25/10, quando buscam o resto do grupo no aeroporto; a partir de 26/10 entram
+  // no roteiro principal (igual ao DEFAULT_DAYS), incluindo o item extra de 04/11
+  // (levar Carou e Vine para o aeroporto de volta).
+  var HOST_MAIN_TAIL = withDayAddition(DEFAULT_DAYS, 11, [
+    {time:"21h", activity:"Levar Carou e Vine ao aeroporto", detail:"Rumo ao aeroporto — o voo de volta deles é 01h da madrugada do dia 05/11."},
+    {time:"22h", activity:"Chegada no aeroporto", detail:"O voo de volta deles é 01h da madrugada do dia 05/11."}
+  ], { homeSub:"Dia livre — depois, levar Carou e Vine ao aeroporto" }).slice(1);
+
+  // Cleire e Sandro já moram em CDMX — não "chegam" no dia 16/10, só vão buscar a carou
+  // no aeroporto às 16h. Os demais dias extras (17 a 24/10) seguem iguais aos da carou.
+  var HOST_DAY1 = {
+    id:1, iso:"2026-10-16", weekday:"Sexta-feira", dateLabel:"16 de outubro",
+    homeTitle:"Buscar a carou no aeroporto", homeSub:"16h no aeroporto",
+    title:"Buscar a carou no aeroporto", accent:"green",
+    subtitle:"Cleire e Sandro já moram em CDMX — hoje é só ir buscar a carou no aeroporto.",
+    schedule:[
+      {time:"15h", activity:"Voo da carou chega", detail:"Voo LA8112, pouso previsto às 15h no aeroporto."},
+      {time:"16h", activity:"Buscar a carou no aeroporto", detail:"Carou chega hoje em CDMX."}
+    ]
+  };
+
+  // Cleire e Sandro também levam Marlene e Valter ao aeroporto no dia seguinte
+  // (05/11), já que o voo deles é às 19h — saída de casa às 15h, no aeroporto às 16h.
+  var CLEIRE_SANDRO_NOV5 = {
+    id:21, iso:"2026-11-05", weekday:"Quinta-feira", dateLabel:"5 de novembro",
+    homeTitle:"Levar Marlene e Valter ao aeroporto", homeSub:"16h no aeroporto",
+    title:"Levar Marlene e Valter ao aeroporto", accent:"green",
+    subtitle:"Hoje é a vez de Marlene e Valter voltarem para casa — vamos ajudá-los a chegar ao aeroporto.",
+    schedule:[
+      {time:"15h", activity:"Saída de casa com Marlene e Valter", detail:"Rumo ao aeroporto."},
+      {time:"16h", activity:"Chegada no aeroporto", detail:"Voo deles sai às 19h."}
+    ]
+  };
+
+  var CLEIRE_DAYS = [HOST_DAY1].concat(CAROU_DAYS.slice(1,9)).concat([AIRPORT_PICKUP_DAY]).concat(renumberDays(HOST_MAIN_TAIL, 9)).concat([CLEIRE_SANDRO_NOV5]);
+  var SANDRO_DAYS = [HOST_DAY1].concat(CAROU_DAYS.slice(1,9)).concat([AIRPORT_PICKUP_DAY]).concat(renumberDays(HOST_MAIN_TAIL, 9)).concat([CLEIRE_SANDRO_NOV5]);
+
+  var HOST_START = new Date(2026,9,16);
+  var DEFAULT_PROFILE = { start: DEFAULT_START, end: DEFAULT_END, days: DEFAULT_DAYS, startLabel:"25 de outubro", endLabel:"4 de novembro", daysCount:11 };
+  var VINE_END = new Date(2026,10,5);
+  var VINE_PROFILE     = { start: DEFAULT_START, end: VINE_END, days: VINE_DAYS,    startLabel:"25 de outubro", endLabel:"5 de novembro", daysCount:12 };
+  var MV_PROFILE       = { start: DEFAULT_START, end: VINE_END, days: MV_DAYS,      startLabel:"25 de outubro", endLabel:"5 de novembro", daysCount:12 };
+  var HOST_COUNTDOWN_LABEL = { singular:"dia para a carou chegar", plural:"dias para a carou chegar" };
+  var CLEIRE_PROFILE   = { start: HOST_START, end: VINE_END, days: CLEIRE_DAYS,  startLabel:"16 de outubro", endLabel:"5 de novembro", daysCount:21, countdownLabel: HOST_COUNTDOWN_LABEL };
+  var SANDRO_PROFILE   = { start: HOST_START, end: VINE_END, days: SANDRO_DAYS,  startLabel:"16 de outubro", endLabel:"5 de novembro", daysCount:21, countdownLabel: HOST_COUNTDOWN_LABEL };
+  var CAROU_PROFILE    = { start: CAROU_START,   end: CAROU_END,   days: CAROU_DAYS,   startLabel:"16 de outubro", endLabel:"5 de novembro", daysCount:21 };
+
+  function getProfile(name){
+    switch(name){
+      case "carou": return CAROU_PROFILE;
+      case "Vine": return VINE_PROFILE;
+      case "Marlene": return MV_PROFILE;
+      case "Valter": return MV_PROFILE;
+      case "Cleire": return CLEIRE_PROFILE;
+      case "Sandro": return SANDRO_PROFILE;
+      default: return DEFAULT_PROFILE;
+    }
+  }
+
+  var TRIP_START, TRIP_END, DAYS, COUNTDOWN_LABEL;
+  function setProfile(name){
+    var p = getProfile(name);
+    TRIP_START = p.start;
+    TRIP_END = p.end;
+    DAYS = p.days;
+    COUNTDOWN_LABEL = p.countdownLabel || { singular:"dia para sua viagem", plural:"dias para sua viagem" };
+    document.getElementById("tripStartLabel").textContent = p.startLabel;
+    document.getElementById("tripEndLabel").textContent = p.endLabel;
+    document.getElementById("tripDaysLabel").textContent = p.daysCount;
+  }
+
+  function accentHex(a){ return a === "red" ? RED : GREEN; }
+  function accentTint(a){ return a === "red" ? RED_TINT : GREEN_TINT; }
+  function accentGlow(a){ return a === "red" ? RED_GLOW : GREEN_GLOW; }
+
+  function dateOnly(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function parseIso(iso){ var p = iso.split("-").map(Number); return new Date(p[0], p[1]-1, p[2]); }
+  function dayDiff(a,b){ return Math.round((a-b)/86400000); }
+  function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+  function safeSet(key,val){ try{ localStorage.setItem(key,val); }catch(e){} }
+  function escapeHtml(str){ var div = document.createElement("div"); div.textContent = str; return div.innerHTML; }
+
+  var screens = {
+    splash: document.getElementById("screen-splash"),
+    welcomeBack: document.getElementById("screen-welcome-back"),
+    name: document.getElementById("screen-name"),
+    home: document.getElementById("screen-home"),
+    day: document.getElementById("screen-day")
+  };
+  var current = null;
+  var currentKey = null;
+  var navStack = [];
+  var scrollPositions = {};
+
+  function showScreen(name, direction){
+    var next = screens[name];
+    if(!next || next === current){ return; }
+    var prev = current;
+    var prevKey = currentKey;
+    direction = direction || "forward";
+    if(prev){ scrollPositions[prevKey] = prev.scrollTop; }
+    next.hidden = false;
+    next.classList.remove("enter-right","enter-left");
+    next.classList.add(direction === "forward" ? "enter-right" : "enter-left");
+    void next.offsetWidth;
+    requestAnimationFrame(function(){
+      next.classList.remove("enter-right","enter-left");
+      if(prev){ prev.classList.add(direction === "forward" ? "leave-left" : "leave-right"); }
+    });
+    current = next;
+    currentKey = name;
+    next.scrollTop = scrollPositions[name] || 0;
+    if(prev){
+      setTimeout(function(){
+        // Só esconde de fato se essa tela ainda não voltou a ser a atual —
+        // evita que uma navegação rápida de ida e volta (ex: swipe logo após
+        // abrir um dia) esconda a tela errada quando este timeout antigo dispara.
+        if(prev !== current){
+          prev.hidden = true;
+          prev.classList.remove("leave-left","leave-right");
+        }
+      }, 480);
+    }
+  }
+
+  // Navegação com histórico: toda vez que avançamos de fato para uma nova tela,
+  // guardamos de onde viemos, para poder voltar (botão, gesto de arrastar, etc.)
+  // sempre para a tela anterior real — e não para uma tela fixa.
+  function navigateTo(name, animDirection){
+    if(current && currentKey){ navStack.push(currentKey); }
+    showScreen(name, animDirection || "forward");
+  }
+  function goBack(){
+    if(!navStack.length){ return; }
+    var prevKey = navStack.pop();
+    showScreen(prevKey, "back");
+  }
+
+  var savedNameAtBoot = safeGet(STORAGE_KEY);
+  if(savedNameAtBoot){
+    screens.splash.hidden = true;
+    screens.welcomeBack.hidden = false;
+    current = screens.welcomeBack;
+    currentKey = "welcomeBack";
+    document.getElementById("welcomeBackSub").textContent = "Que bom que voltou, " + savedNameAtBoot.split(" ")[0] + "!";
+    applyName(savedNameAtBoot);
+    renderHome();
+    setTimeout(function(){ showScreen("home","forward"); }, 1600);
+  } else {
+    current = screens.splash;
+    currentKey = "splash";
+  }
+
+  document.getElementById("welcomeBackLink").addEventListener("click", function(e){
+    e.preventDefault();
+    showScreen("home","forward");
+  });
+
+  document.getElementById("splashContinue").addEventListener("click", function(){
+    navigateTo("name");
+  });
+
+  var nameForm = document.getElementById("nameForm");
+  var nameInput = document.getElementById("nameInput");
+  var nameContinue = document.getElementById("nameContinue");
+  var NAME_OPTIONS = ["carou","Cleire","Marlene","Sandro","Valter","Vine"];
+
+  var nameSelectWrap = document.getElementById("nameSelect");
+  var nameTrigger = document.getElementById("nameTrigger");
+  var nameTriggerLabel = document.getElementById("nameTriggerLabel");
+  var nameMenu = document.getElementById("nameMenu");
+  var nameOptionEls = Array.prototype.slice.call(nameMenu.querySelectorAll(".name-select-option"));
+
+  function setNameValue(val, label){
+    nameInput.value = val || "";
+    if(val){
+      nameTriggerLabel.textContent = label || val;
+      nameTriggerLabel.classList.remove("placeholder");
+    } else {
+      nameTriggerLabel.textContent = "Selecione seu nome";
+      nameTriggerLabel.classList.add("placeholder");
+    }
+    nameContinue.disabled = !val;
+    nameOptionEls.forEach(function(opt){
+      opt.classList.toggle("selected", opt.getAttribute("data-value") === val);
+    });
+  }
+  function openNameMenu(){
+    nameMenu.hidden = false;
+    nameTrigger.classList.add("open");
+    nameTrigger.setAttribute("aria-expanded","true");
+  }
+  function closeNameMenu(){
+    nameMenu.hidden = true;
+    nameTrigger.classList.remove("open");
+    nameTrigger.setAttribute("aria-expanded","false");
+  }
+  nameTrigger.addEventListener("click", function(e){
+    e.preventDefault();
+    if(nameMenu.hidden){ openNameMenu(); } else { closeNameMenu(); }
+  });
+  nameOptionEls.forEach(function(opt){
+    opt.addEventListener("click", function(){
+      setNameValue(opt.getAttribute("data-value"), opt.textContent);
+      closeNameMenu();
+    });
+  });
+  document.addEventListener("click", function(e){
+    if(!nameSelectWrap.contains(e.target)) closeNameMenu();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeNameMenu();
+  });
+
+  var nameSubmitted = false;
+  function submitName(){
+    if(nameSubmitted) return;
+    var val = nameInput.value.trim();
+    if(!val) return;
+    nameSubmitted = true;
+    safeSet(STORAGE_KEY, val);
+    applyName(val);
+    renderHome();
+    navigateTo("home");
+    setTimeout(function(){ nameSubmitted = false; }, 600);
+  }
+  nameForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    submitName();
+  });
+  // Fallback: some mobile browsers can suppress the form's submit event
+  // right after the on-screen keyboard closes, so also bind the click directly.
+  nameContinue.addEventListener("click", function(e){
+    e.preventDefault();
+    submitName();
+  });
+
+  function applyName(name){
+    setProfile(name);
+    var firstName = name.split(" ")[0];
+    document.getElementById("greetingEyebrow").textContent = "Olá,";
+    document.getElementById("greetingName").textContent = firstName;
+  }
+
+  document.getElementById("renameBtn").addEventListener("click", function(){
+    var saved = safeGet(STORAGE_KEY) || "";
+    setNameValue(NAME_OPTIONS.indexOf(saved) !== -1 ? saved : "");
+    closeNameMenu();
+    navigateTo("name","back");
+  });
+
+  function buntingHtml(colors, w, h){
+    return colors.map(function(c){
+      return '<span style="width:'+w+'px;height:'+h+'px;background:'+c+';"></span>';
+    }).join("");
+  }
+
+  function renderHome(){
+    var today = dateOnly(new Date());
+    var todayDay = null;
+    DAYS.forEach(function(day){
+      if(dateOnly(parseIso(day.iso)).getTime() === today.getTime()){ todayDay = day; }
+    });
+
+    var heroArea = document.getElementById("heroArea");
+
+    if(todayDay){
+      // trip in progress: show today's hero card, like HomeHoje/HomeDia04
+      heroArea.innerHTML =
+        '<p class="hero-today-label">Hoje</p>' +
+        '<a href="#" class="hero-today" id="heroTodayLink">' +
+        '  <span class="hero-today-badge">' + String(todayDay.id).padStart(2,"0") + '</span>' +
+        '  <span class="hero-today-info">' +
+        '    <span class="hero-today-date">' + escapeHtml(todayDay.weekday) + ' · ' + escapeHtml(todayDay.dateLabel) + '</span>' +
+        '    <span class="hero-today-title">' + escapeHtml(todayDay.homeTitle) + '</span>' +
+        '    <span class="hero-today-sub">' + escapeHtml(todayDay.homeSub) + '</span>' +
+        '  </span>' +
+        '  <span class="hero-today-chevron">›</span>' +
+        '</a>';
+      document.getElementById("heroTodayLink").addEventListener("click", function(e){
+        e.preventDefault();
+        openDay(todayDay.id);
+      });
+    } else {
+      var start = dateOnly(TRIP_START);
+      var end = dateOnly(TRIP_END);
+      var diff = dayDiff(start, today);
+      var numberHtml, labelText;
+      if(diff > 0){
+        numberHtml = diff;
+        labelText = diff === 1 ? COUNTDOWN_LABEL.singular : COUNTDOWN_LABEL.plural;
+      } else if(today.getTime() <= end.getTime()){
+        numberHtml = "Boa viagem!";
+        labelText = "Aproveite cada dia em CDMX";
+      } else {
+        numberHtml = "Até a próxima!";
+        labelText = "Esperamos que tenha sido incrível";
+      }
+      heroArea.innerHTML =
+        '<div class="countdown-card">' +
+        '  <div class="countdown-bunting" aria-hidden="true">' + buntingHtml(["#006341","#ffffff","#CE1126","#006341","#ffffff","#CE1126","#006341"],16,20) + '</div>' +
+        '  <div class="countdown-faltam">Faltam</div>' +
+        '  <div class="countdown-number' + (typeof numberHtml === "string" ? " today-msg" : "") + '">' + numberHtml + '</div>' +
+        '  <div class="countdown-label">' + labelText + '</div>' +
+        '</div>';
+    }
+
+    var upcoming = [];
+    var past = [];
+    DAYS.forEach(function(day){
+      if(todayDay && day.id === todayDay.id) return;
+      var d = dateOnly(parseIso(day.iso));
+      if(d.getTime() < today.getTime()){ past.push(day); }
+      else { upcoming.push(day); }
+    });
+    var ordered = upcoming.concat(past);
+
+    var list = document.getElementById("dayList");
+    list.innerHTML = "";
+
+    ordered.forEach(function(day){
+      var d = dateOnly(parseIso(day.iso));
+      var isPast = d.getTime() < today.getTime();
+      var accent = accentHex(day.accent);
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "day-item" + (isPast ? " is-past" : "");
+      btn.style.setProperty("--accent", accent);
+      btn.setAttribute("aria-label", day.weekday + ", " + day.dateLabel + ": " + day.homeTitle);
+
+      var badge = document.createElement("span");
+      badge.className = "day-badge";
+      badge.textContent = String(day.id).padStart(2,"0");
+
+      var info = document.createElement("span");
+      info.className = "day-info";
+      info.innerHTML =
+        '<span class="day-date">' + escapeHtml(day.weekday) + ' · ' + escapeHtml(day.dateLabel) + '</span>' +
+        '<span class="day-title">' + escapeHtml(day.homeTitle) + '</span>';
+
+      btn.appendChild(badge);
+      btn.appendChild(info);
+
+      var chevron = document.createElement("span");
+      chevron.className = "chevron";
+      chevron.textContent = "›";
+      btn.appendChild(chevron);
+
+      btn.addEventListener("click", function(){ openDay(day.id); });
+      list.appendChild(btn);
+    });
+  }
+
+  function openDay(id){
+    var day = DAYS.filter(function(d){ return d.id === id; })[0];
+    if(!day) return;
+
+    var accent = accentHex(day.accent);
+    var tint = accentTint(day.accent);
+    var glow = accentGlow(day.accent);
+
+    var container = document.getElementById("dayDetailContent");
+    container.style.setProperty("--accent", accent);
+    container.style.setProperty("--accent-tint", tint);
+    container.style.setProperty("--accent-glow", glow);
+
+    var html = '';
+    html += '<div class="day-header">';
+    html += '  <div class="day-header-top">';
+    html += '    <span class="day-badge">' + String(day.id).padStart(2,"0") + '</span>';
+    html += '    <span class="day-header-date">' + escapeHtml(day.weekday) + ' · ' + escapeHtml(day.dateLabel) + '</span>';
+    html += '  </div>';
+    html += '  <h2 class="day-header-title">' + escapeHtml(day.title) + '</h2>';
+    if(day.tag){ html += '  <span class="day-header-tag">' + escapeHtml(day.tag) + '</span>'; }
+    html += '  <p class="day-header-sub">' + escapeHtml(day.subtitle) + '</p>';
+    html += '</div>';
+
+    html += '<div class="timeline">';
+    day.schedule.forEach(function(row){
+      html += '<div class="t-item">';
+      html += '  <div class="t-marker"><span class="t-dot"></span><span class="t-line"></span></div>';
+      html += '  <div class="t-card">';
+      html += '    <span class="t-time">' + escapeHtml(row.time) + '</span>';
+      html += '    <div class="t-activity">' + escapeHtml(row.activity) + '</div>';
+      if(row.address){
+        html += '    <div class="t-addr">' + PIN_ICON("#9C8F97") + '<span>' + escapeHtml(row.address) + '</span></div>';
+      }
+      if(row.detail){ html += '    <div class="t-detail">' + escapeHtml(row.detail) + '</div>'; }
+      if(row.ticket){ html += '    <span class="t-ticket">' + TICKET_ICON + '<span>' + escapeHtml(row.ticket) + '</span></span>'; }
+      if(row.info){ html += '    <span class="t-info">' + TICKET_ICON + '<span>' + escapeHtml(row.info) + '</span></span>'; }
+      html += '  </div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    if(day.notes && day.notes.length){
+      html += '<div class="callout">';
+      html += '  <div class="callout-title">Vale saber</div><ul>';
+      day.notes.forEach(function(n){ html += '<li>' + escapeHtml(n) + '</li>'; });
+      html += '  </ul></div>';
+    }
+
+    container.innerHTML = html;
+    navigateTo("day");
+  }
+
+  document.getElementById("backBtn").addEventListener("click", function(){ goBack(); });
+
+  // Arrastar da esquerda para a direita (gesto comum de "voltar") em qualquer
+  // tela leva para a página anterior, igual ao botão de voltar.
+  (function(){
+    var startX = null, startY = null, startTime = null, active = false;
+    var SWIPE_MIN_DX = 70;
+    var SWIPE_MAX_OFF_AXIS = 60;
+    var SWIPE_MAX_TIME = 1000;
+
+    document.addEventListener("pointerdown", function(e){
+      if(e.pointerType === "mouse" && e.button !== 0) return;
+      startX = e.clientX;
+      startY = e.clientY;
+      startTime = Date.now();
+      active = true;
+    });
+    document.addEventListener("pointerup", function(e){
+      if(!active) return;
+      active = false;
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+      var dt = Date.now() - startTime;
+      if(dx > SWIPE_MIN_DX && Math.abs(dy) < SWIPE_MAX_OFF_AXIS && dt < SWIPE_MAX_TIME){
+        goBack();
+      }
+    });
+    document.addEventListener("pointercancel", function(){ active = false; });
+
+    // Em notebook/desktop, arrastar com dois dedos no trackpad não gera eventos
+    // de toque/ponteiro — o navegador manda eventos de "wheel" (roda do mouse).
+    // Detecta esse gesto também, somando o movimento horizontal de uma rajada
+    // de eventos wheel seguidos (a mesma "rolagem contínua").
+    var wheelDx = 0, wheelDy = 0, wheelLast = 0, wheelTriggered = false, wheelResetTimer = null;
+    var WHEEL_MIN_DX = 90;
+    var WHEEL_MAX_OFF_AXIS = 40;
+    document.addEventListener("wheel", function(e){
+      var now = Date.now();
+      if(now - wheelLast > 250){
+        wheelDx = 0;
+        wheelDy = 0;
+        wheelTriggered = false;
+      }
+      wheelLast = now;
+      wheelDx += e.deltaX;
+      wheelDy += e.deltaY;
+      clearTimeout(wheelResetTimer);
+      wheelResetTimer = setTimeout(function(){ wheelDx = 0; wheelDy = 0; wheelTriggered = false; }, 250);
+      // deltaX negativo = conteúdo se movendo para a direita (dedos arrastando
+      // da esquerda para a direita) na maioria dos trackpads/navegadores.
+      if(!wheelTriggered && wheelDx < -WHEEL_MIN_DX && Math.abs(wheelDy) < WHEEL_MAX_OFF_AXIS){
+        wheelTriggered = true;
+        goBack();
+      }
+    }, { passive: true });
+  })();
+})();
+</script>
+
+</body></html>
