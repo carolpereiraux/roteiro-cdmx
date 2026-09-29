@@ -187,6 +187,14 @@
   .t-info{color:#655A63;background:rgba(101,90,99,.13);}
   .t-ticket svg,.t-info svg{flex:none;}
 
+
+  .t-rest{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);}
+  .t-rest + .t-rest{margin-top:10px;}
+  .t-rest-title{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--ink-body);line-height:1.45;font-weight:500;}
+  .t-rest-title svg{color:var(--marigold);}
+  .t-rest-title b{color:var(--ink);font-weight:700;}
+  .t-rest-addr{margin-top:5px;padding-left:1px;}
+
   .callout{margin-top:6px;border-left:3px solid var(--green);border-radius:0 14px 14px 0;padding:16px 18px;background-color:#F7F9F8;}
   .callout-title{font-size:12.5px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
   .callout ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;}
@@ -312,6 +320,7 @@
   var RED = "#CE1126", RED_TINT = "#F6E7E7", RED_GLOW = "rgba(206,17,38,0.13)";
 
   var TICKET_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z"/><path d="M13 5v2M13 17v2M13 10.5v3"/></svg>';
+  var FOOD_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><path d="M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2"/><path d="M6 2v20"/><path d="M18 22V2c-2.5 1.5-4 4.5-4 8 0 2 1 3 2 3h2"/></svg>';
   var PIN_ICON = function(color){ return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'; };
 
   var DEFAULT_DAYS = [
@@ -350,7 +359,7 @@
       schedule:[
         {time:"8h", activity:"Saída de casa para encontrar o guia", address:"Decatlhon", detail:"Van/carro do tour"},
         {time:"~9h – 13h", activity:"Zona Arqueológica de Teotihuacán", detail:"Pirâmide do Sol, Pirâmide da Lua, Calçada dos Mortos."},
-        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia"},
+        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia", restaurant:[{"name": "La Gruta", "what": "restaurante dentro de uma caverna natural, cozinha mexicana tradicional (vale reservar)", "address": "San Juan Teotihuacán, a 200 m da Puerta 5 da zona arqueológica"}]},
         {time:"~15h – 16h", activity:"Basílica de Guadalupe", detail:"Fica no caminho de volta à cidade, entre Teotihuacán e o Centro, é o Santuário mais visitado do México."},
         {time:"~16h – 17h", activity:"Volta para a Decatlhon", detail:"Mesma localização de encontro do início do dia"},
         {time:"Final do dia", activity:"Volta para a hospedagem", detail:"Jantar livre e descanso"}
@@ -365,9 +374,9 @@
         {time:"9h", activity:"Saída de casa"},
         {time:"10h – 11h30", activity:"Castillo de Chapultepec", detail:"Foi a residência do imperador Maximiliano e depois de presidentes mexicanos. Reserve pelo menos 1h30 de tour.", info:"Ingressos no local e em dinheiro"},
         {time:"12h", activity:"Caminhada até o Museu de Antropologia", detail:"~15–20min a pé descendo pelo parque"},
-        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar."},
+        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar.", restaurant:[{"name": "Librería Porrúa", "what": "livraria com café e terraço com vista pro lago (molletes, paninis, café)", "address": "Av. Grutas s/n, Bahía Grutas, 1ª Seção do Bosque de Chapultepec"}]},
         {time:"14h – 17h", activity:"Museu Nacional de Antropologia", detail:"Maior e mais importante museu do México — acervo arqueológico e etnográfico de todas as culturas do país (inclui a Pedra do Sol/calendário asteca).", info:"Ingressos $210 - Compra na hora"},
-        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa..."},
+        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa...", restaurant:[{"name": "Orinoco", "what": "taquería, rede de tacos", "address": "Av. Horacio 400, Polanco V Secc."}]},
         {time:"Noite", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
@@ -383,7 +392,7 @@
         {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
         {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
         {time:"Final do dia", activity:"Volta para a hospedagem"},
-        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem."}
+        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
       ]
     },
     {
@@ -396,10 +405,10 @@
         {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso."},
         {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
         {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
-        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)"},
-        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora"},
-        {time:"~15h", activity:"Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 17h30.", info:"Ingressos ~$85 - Compra na hora"},
-        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir."},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
+        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
         {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
@@ -424,7 +433,7 @@
       schedule:[
         {time:"9h", activity:"Saída de casa"},
         {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
-        {time:"13h", activity:"Almoço no Centro"},
+        {time:"13h", activity:"Almoço no Centro", restaurant:[{"name": "Los Cocuyos", "what": "tacos de rua, no Guia Michelin", "address": "Calle Bolívar 57, Centro Histórico"}]},
         {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
         {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
         {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
@@ -436,7 +445,7 @@
       title:"Panteón de San Gregorio", accent:"green",
       subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
       schedule:[
-        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer..."},
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer...", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
         {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
         {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
         {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
@@ -449,7 +458,7 @@
       title:"Lucha Libre — Arena México (CMLL)", accent:"red",
       subtitle:"Tipo de luta livre profissional originária do México, caracterizada por acrobacias, golpes aéreos e o uso marcante de máscaras coloridas.",
       schedule:[
-        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro."},
+        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro.", restaurant:[{"name": "Cariñito Tacos", "what": "tacos de fusão com influência do Sudeste Asiático, no Guia Michelin", "address": "Guanajuato 53, Roma Norte"}]},
         {time:"18h30", activity:"Saída de casa"},
         {time:"19h30", activity:"Lucha Libre — Arena México (CMLL)", address:"Rua Dr. Lavista 189, Doctores", detail:"Início as 19h30.", ticket:"Ingressos comprados"}
       ]
@@ -461,7 +470,7 @@
       subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h.",
       schedule:[
         {time:"Dia livre", activity:"Manhã e início da tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em algum lugar para conhecer outros pontos."},
-        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho."}
+        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho.", restaurant:[{"name": "Shake Shack", "what": "hamburgueria", "address": "Av. Ejército Nacional 769, Miyana, Granada (perto do Soumaya)"}]}
       ]
     }
   ];
@@ -584,7 +593,7 @@
       schedule:[
         {time:"8h", activity:"Saída de casa para encontrar o guia", address:"Decatlhon", detail:"Van/carro do tour"},
         {time:"~9h – 13h", activity:"Zona Arqueológica de Teotihuacán", detail:"Pirâmide do Sol, Pirâmide da Lua, Calçada dos Mortos."},
-        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia"},
+        {time:"~13h – 14h", activity:"Almoço", detail:"Restaurante com buffet livre de indicação do guia", restaurant:[{"name": "La Gruta", "what": "restaurante dentro de uma caverna natural, cozinha mexicana tradicional (vale reservar)", "address": "San Juan Teotihuacán, a 200 m da Puerta 5 da zona arqueológica"}]},
         {time:"~15h – 16h", activity:"Basílica de Guadalupe", detail:"Fica no caminho de volta à cidade, entre Teotihuacán e o Centro, é o Santuário mais visitado do México."},
         {time:"~16h – 17h", activity:"Volta para a Decatlhon", detail:"Mesma localização de encontro do início do dia"},
         {time:"Final do dia", activity:"Volta para a hospedagem", detail:"Jantar livre e descanso"}
@@ -599,9 +608,9 @@
         {time:"9h", activity:"Saída de casa"},
         {time:"10h – 11h30", activity:"Castillo de Chapultepec", detail:"Foi a residência do imperador Maximiliano e depois de presidentes mexicanos. Reserve pelo menos 1h30 de tour.", info:"Ingressos no local e em dinheiro"},
         {time:"12h", activity:"Caminhada até o Museu de Antropologia", detail:"~15–20min a pé descendo pelo parque"},
-        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar."},
+        {time:"12h30", activity:"Almoço", detail:"No café do museu, ou em Polanco antes de entrar.", restaurant:[{"name": "Librería Porrúa", "what": "livraria com café e terraço com vista pro lago (molletes, paninis, café)", "address": "Av. Grutas s/n, Bahía Grutas, 1ª Seção do Bosque de Chapultepec"}]},
         {time:"14h – 17h", activity:"Museu Nacional de Antropologia", detail:"Maior e mais importante museu do México — acervo arqueológico e etnográfico de todas as culturas do país (inclui a Pedra do Sol/calendário asteca).", info:"Ingressos $210 - Compra na hora"},
-        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa..."},
+        {time:"Final do dia", activity:"Livre em Polanco", detail:"Passeio por lojas, Parque Lincoln, comer alguma coisa...", restaurant:[{"name": "Orinoco", "what": "taquería, rede de tacos", "address": "Av. Horacio 400, Polanco V Secc."}]},
         {time:"Noite", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
@@ -617,7 +626,7 @@
         {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
         {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
         {time:"Final do dia", activity:"Volta para a hospedagem"},
-        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem."}
+        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
       ]
     },
     {
@@ -630,10 +639,10 @@
         {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso."},
         {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
         {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
-        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)"},
-        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora"},
-        {time:"~15h", activity:"Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 17h30.", info:"Ingressos ~$85 - Compra na hora"},
-        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir."},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
+        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
         {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
@@ -658,7 +667,7 @@
       schedule:[
         {time:"9h", activity:"Saída de casa"},
         {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
-        {time:"13h", activity:"Almoço no Centro"},
+        {time:"13h", activity:"Almoço no Centro", restaurant:[{"name": "Los Cocuyos", "what": "tacos de rua, no Guia Michelin", "address": "Calle Bolívar 57, Centro Histórico"}]},
         {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
         {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
         {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
@@ -670,7 +679,7 @@
       title:"Panteón de San Gregorio", accent:"green",
       subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
       schedule:[
-        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer..."},
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer...", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
         {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
         {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
         {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
@@ -683,7 +692,7 @@
       title:"Lucha Libre — Arena México (CMLL)", accent:"red",
       subtitle:"Tipo de luta livre profissional originária do México, caracterizada por acrobacias, golpes aéreos e o uso marcante de máscaras coloridas.",
       schedule:[
-        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro."},
+        {time:"Dia livre", activity:"Manhã e tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em Polanco para conhecer outros pontos. Sugestão: aproveitar pra ir ver a exposição dos Alebrijes Monumentales na Reforma, que fica exposta até domingo, dia 8 de novembro.", restaurant:[{"name": "Cariñito Tacos", "what": "tacos de fusão com influência do Sudeste Asiático, no Guia Michelin", "address": "Guanajuato 53, Roma Norte"}]},
         {time:"18h30", activity:"Saída de casa"},
         {time:"19h30", activity:"Lucha Libre — Arena México (CMLL)", address:"Rua Dr. Lavista 189, Doctores", detail:"Início as 19h30.", ticket:"Ingressos comprados"}
       ]
@@ -695,7 +704,7 @@
       subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h — à noite é hora de ir pro aeroporto.",
       schedule:[
         {time:"Dia livre", activity:"Manhã e início da tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em algum lugar para conhecer outros pontos."},
-        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho."},
+        {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho.", restaurant:[{"name": "Shake Shack", "what": "hamburgueria", "address": "Av. Ejército Nacional 769, Miyana, Granada (perto do Soumaya)"}]},
         {time:"22h", activity:"Saída para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."}
       ]
     },
@@ -1164,6 +1173,14 @@
       if(row.detail){ html += '    <div class="t-detail">' + escapeHtml(row.detail) + '</div>'; }
       if(row.ticket){ html += '    <span class="t-ticket">' + TICKET_ICON + '<span>' + escapeHtml(row.ticket) + '</span></span>'; }
       if(row.info){ html += '    <span class="t-info">' + TICKET_ICON + '<span>' + escapeHtml(row.info) + '</span></span>'; }
+      if(row.restaurant){
+        (Array.isArray(row.restaurant) ? row.restaurant : [row.restaurant]).forEach(function(r){
+          html += '    <div class="t-rest">';
+          html += '      <div class="t-rest-title">' + FOOD_ICON + '<span>Sugestão de restaurante: <b>' + escapeHtml(r.name) + '</b>, ' + escapeHtml(r.what) + '</span></div>';
+          html += '      <div class="t-addr t-rest-addr">' + PIN_ICON("#9C8F97") + '<span>' + escapeHtml(r.address) + '</span></div>';
+          html += '    </div>';
+        });
+      }
       html += '  </div>';
       html += '</div>';
     });
