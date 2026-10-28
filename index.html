@@ -368,6 +368,37 @@
     },
     {
       id:4, iso:"2026-10-28", weekday:"Quarta-feira", dateLabel:"28 de outubro",
+      homeTitle:"Centro Santa Fe + Mega Ofrenda no Zócalo", homeSub:"Compras de manhã, mega oferenda à noite",
+      title:"Centro Santa Fe + Mega Ofrenda no Zócalo", accent:"red",
+      subtitle:"Manhã de compras no Centro Santa Fe, pausa em casa à tarde para descansar e, à noite, a mega oferenda no Zócalo.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"Manhã", activity:"Compras no Centro Santa Fe", address:"Av. Vasco de Quiroga 3800, Santa Fe"},
+        {time:"12h", activity:"Almoço no shopping", detail:"Almoço no próprio Centro Santa Fe.", restaurant:[{"name": "The Cheesecake Factory", "what": "rede americana famosa pelos cheesecakes, pra sobremesa", "address": "Centro Santa Fe, Av. Vasco de Quiroga 3800, Santa Fe"}]},
+        {time:"15h", activity:"Volta para casa", detail:"Descansar um pouco e tomar um banho."},
+        {time:"19h", activity:"Saída de casa para o Zócalo"},
+        {time:"Noite", activity:"Mega Ofrenda no Zócalo", address:"Zócalo (Praça da Constituição)", detail:"Ofrenda monumental de Día de Muertos na praça principal da cidade.", info:"Gratuito"}
+      ]
+    },
+    {
+      id:5, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
+      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
+      title:"Centro Histórico", accent:"green",
+      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso.", restaurant:[{"name": "Pastelería Madrid", "what": "pastelaria e padaria tradicional do Centro, pra comer tostadas e pan de muerto", "address": "Calle 5 de Febrero 25-27, Centro Histórico"}]},
+        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
+        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
+        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
+        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
+      ]
+    },
+    {
+      id:6, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
       homeTitle:"Castillo de Chapultepec + Museu de Antropologia", homeSub:"Dentro do Bosque de Chapultepec",
       title:"Castillo de Chapultepec + Museu de Antropologia", accent:"red",
       subtitle:"Os dois ficam dentro do Bosque de Chapultepec, a uns 15–20min a pé um do outro.",
@@ -382,72 +413,39 @@
       ]
     },
     {
-      id:5, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
-      homeTitle:"Xochimilco + Ikea e compras", homeSub:"Trajinera de manhã, IKEA à tarde",
-      title:"Xochimilco + Ikea e compras", accent:"green",
-      subtitle:"Manhã de passeio de trajinera em Xochimilco, com almoço por lá ou já na IKEA — a tarde segue como antes, para compras.",
-      schedule:[
-        {time:"8h00", activity:"Saída de casa", detail:"Xochimilco fica mais longe da hospedagem — calculem 45–60min de carro"},
-        {time:"9h00", activity:"Passeio de trajinera em Xochimilco", detail:"Embarcadouro de Nativitas ou Cuemanco. Reserve pelo menos 2h de passeio, ideal para a primeira visita."},
-        {time:"11h30", activity:"Saída para IKEA CDMX", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"40–50min de carro — fica no bairro Moctezuma/Oceanía, zona leste."},
-        {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
-        {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
-        {time:"Final do dia", activity:"Volta para a hospedagem"},
-        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
-      ]
-    },
-    {
-      id:6, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
-      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
-      title:"Centro Histórico", accent:"red",
-      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
-      schedule:[
-        {time:"9h", activity:"Saída de casa"},
-        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso.", restaurant:[{"name": "Pastelería Madrid", "what": "pastelaria e padaria tradicional do Centro, pra comer tostadas e pan de muerto", "address": "Calle 5 de Febrero 25-27, Centro Histórico"}]},
-        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
-        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
-        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
-        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
-        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
-        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
-        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
-      ]
-    },
-    {
       id:7, iso:"2026-10-31", weekday:"Sábado", dateLabel:"31 de outubro",
-      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"12h — horário e rota oficiais",
+      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"14h — horário e rota oficiais",
       title:"Grande Desfile de Día de Muertos", accent:"green",
       subtitle:"É um desfile espetacular com carros alegóricos, caveiras gigantes, bonecos monumentais, acrobatas e milhares de participantes fantasiados.",
       schedule:[
         {time:"Manhã", activity:"Manhã livre", detail:"Se preferirem, fiquem por perto antes do desfile. Podem ir à feira de Coyoacán que fica mais longe da rota. Calculem pelo menos 40–50min de deslocamento até lá."},
-        {time:"10h30", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
-        {time:"11h", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
-        {time:"A partir das 12h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
+        {time:"12h", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
+        {time:"12h30", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
+        {time:"A partir das 14h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
       ],
       notes:["Se decidirem pela feira em Coyoacán de manhã, o deslocamento até a rota do desfile é o ponto de atenção — são bairros bem distantes um do outro."]
     },
     {
       id:8, iso:"2026-11-01", weekday:"Domingo", dateLabel:"1 de novembro",
-      homeTitle:"Feira de miniaturas + Coyoacán", homeSub:"Bairros diferentes, ~25–30min",
-      title:"Feira de miniaturas + Coyoacán", accent:"red",
-      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, oferendas de Día de Muertos.",
+      homeTitle:"Feira de miniaturas + Feira de Chapultepec", homeSub:"Centro de manhã, Chapultepec à tarde",
+      title:"Feira de miniaturas + Feira de Chapultepec", accent:"red",
+      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, a Feria de Chapultepec.",
       schedule:[
         {time:"9h", activity:"Saída de casa"},
         {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
         {time:"13h", activity:"Almoço no Centro", restaurant:[{"name": "Los Cocuyos", "what": "tacos de rua, no Guia Michelin", "address": "Calle Bolívar 57, Centro Histórico"}]},
-        {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
-        {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
+        {time:"14h", activity:"Deslocamento até Chapultepec", detail:"Do Centro até a 2ª Seção do Bosque de Chapultepec, calculem uns 20–30min de carro"},
+        {time:"14h30–17h30", activity:"Feira de Chapultepec", address:"Av. de los Compositores s/n, 2ª Seção do Bosque de Chapultepec", detail:"Parque de diversões dentro do Bosque de Chapultepec. Confirmar horário de domingo e valor dos ingressos antes de ir."},
         {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
     {
       id:9, iso:"2026-11-02", weekday:"Segunda-feira", dateLabel:"2 de novembro",
-      homeTitle:"Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
-      title:"Panteón de San Gregorio", accent:"green",
+      homeTitle:"Manhã livre + Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
+      title:"Manhã livre + Panteón de San Gregorio", accent:"green",
       subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
       schedule:[
-        {time:"8h", activity:"Sugestão: sair de casa para Toluca", detail:"Último dia da Feria del Alfeñique (3 de outubro a 2 de novembro), no centro de Toluca. Dá pra ir de Tren Interurbano (Observatorio → Toluca Centro, 90 pesos por pessoa) ou de carro. Depois fica longe pra ir direto pro Panteón de San Gregorio, então voltem pra hospedagem antes de sair pra Xochimilco."},
-        {time:"Na volta", activity:"Almoço livre", detail:"Se sobrar tempo antes de sair pra Xochimilco, escolham onde comer.", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer...", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
         {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
         {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
         {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
@@ -606,6 +604,37 @@
     },
     {
       id:13, iso:"2026-10-28", weekday:"Quarta-feira", dateLabel:"28 de outubro",
+      homeTitle:"Centro Santa Fe + Mega Ofrenda no Zócalo", homeSub:"Compras de manhã, mega oferenda à noite",
+      title:"Centro Santa Fe + Mega Ofrenda no Zócalo", accent:"red",
+      subtitle:"Manhã de compras no Centro Santa Fe, pausa em casa à tarde para descansar e, à noite, a mega oferenda no Zócalo.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"Manhã", activity:"Compras no Centro Santa Fe", address:"Av. Vasco de Quiroga 3800, Santa Fe"},
+        {time:"12h", activity:"Almoço no shopping", detail:"Almoço no próprio Centro Santa Fe.", restaurant:[{"name": "The Cheesecake Factory", "what": "rede americana famosa pelos cheesecakes, pra sobremesa", "address": "Centro Santa Fe, Av. Vasco de Quiroga 3800, Santa Fe"}]},
+        {time:"15h", activity:"Volta para casa", detail:"Descansar um pouco e tomar um banho."},
+        {time:"19h", activity:"Saída de casa para o Zócalo"},
+        {time:"Noite", activity:"Mega Ofrenda no Zócalo", address:"Zócalo (Praça da Constituição)", detail:"Ofrenda monumental de Día de Muertos na praça principal da cidade.", info:"Gratuito"}
+      ]
+    },
+    {
+      id:14, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
+      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
+      title:"Centro Histórico", accent:"green",
+      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
+      schedule:[
+        {time:"9h", activity:"Saída de casa"},
+        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso.", restaurant:[{"name": "Pastelería Madrid", "what": "pastelaria e padaria tradicional do Centro, pra comer tostadas e pan de muerto", "address": "Calle 5 de Febrero 25-27, Centro Histórico"}]},
+        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
+        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
+        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
+        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
+        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
+        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
+        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
+      ]
+    },
+    {
+      id:15, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
       homeTitle:"Castillo de Chapultepec + Museu de Antropologia", homeSub:"Dentro do Bosque de Chapultepec",
       title:"Castillo de Chapultepec + Museu de Antropologia", accent:"red",
       subtitle:"Os dois ficam dentro do Bosque de Chapultepec, a uns 15–20min a pé um do outro.",
@@ -620,72 +649,39 @@
       ]
     },
     {
-      id:14, iso:"2026-10-29", weekday:"Quinta-feira", dateLabel:"29 de outubro",
-      homeTitle:"Xochimilco + Ikea e compras", homeSub:"Trajinera de manhã, IKEA à tarde",
-      title:"Xochimilco + Ikea e compras", accent:"green",
-      subtitle:"Manhã de passeio de trajinera em Xochimilco, com almoço por lá ou já na IKEA — a tarde segue como antes, para compras.",
-      schedule:[
-        {time:"8h00", activity:"Saída de casa", detail:"Xochimilco fica mais longe da hospedagem — calculem 45–60min de carro"},
-        {time:"9h00", activity:"Passeio de trajinera em Xochimilco", detail:"Embarcadouro de Nativitas ou Cuemanco. Reserve pelo menos 2h de passeio, ideal para a primeira visita."},
-        {time:"11h30", activity:"Saída para IKEA CDMX", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"40–50min de carro — fica no bairro Moctezuma/Oceanía, zona leste."},
-        {time:"12h30 – 13h", activity:"Almoço na IKEA", detail:"Comidas tradicionais da rede de lojas, originada na Suécia."},
-        {time:"13h30", activity:"Passeio pela IKEA", address:"Av. del Peñón 355, Moctezuma 2ª Secc.", detail:"Aberto todos os dias, até 21h."},
-        {time:"Final do dia", activity:"Volta para a hospedagem"},
-        {time:"Noite", activity:"Noite livre", detail:"Dependendo do horário, jantar em casa, ou aproveitar pra conhecer a região da hospedagem.", restaurant:[{"name": "Salón Palomilla", "what": "restaurante-bar escuro no segundo andar, cozinha a brasa e boa música (abre às 18h)", "address": "Av. Yucatán 84-C, Roma Norte"}]}
-      ]
-    },
-    {
-      id:15, iso:"2026-10-30", weekday:"Sexta-feira", dateLabel:"30 de outubro",
-      homeTitle:"Centro Histórico", homeSub:"Tudo a pé, raio de 10–15min",
-      title:"Centro Histórico", accent:"red",
-      subtitle:"Tudo aqui fica a pé um do outro (raio de 10–15min caminhando), então dá pra fazer o dia inteiro sem precisar de carro.",
-      schedule:[
-        {time:"9h", activity:"Saída de casa"},
-        {time:"10h", activity:"Zócalo (Praça da Constituição)", detail:"Uma das maiores praças do mundo, coração histórico da cidade. Livre, sem ingresso.", restaurant:[{"name": "Pastelería Madrid", "what": "pastelaria e padaria tradicional do Centro, pra comer tostadas e pan de muerto", "address": "Calle 5 de Febrero 25-27, Centro Histórico"}]},
-        {time:"10h15", activity:"Catedral Metropolitana", detail:"Ao lado do Zócalo. Entrada livre."},
-        {time:"11h", activity:"Palácio Nacional", detail:"Murais de Diego Rivera contando a história do México. Entrada gratuita, mas exige registro prévio simples. Entender no local onde fazer o registro"},
-        {time:"~12h", activity:"Almoço no Cerrojo Cocina Mexicana Contemporánea", detail:"Sugestão da Cleire :)", restaurant:[{"name": "Cerrojo Cocina Mexicana Contemporánea", "what": "cozinha mexicana contemporânea, com varanda com vista pro Zócalo (fica no 1º andar, entrada por uma joalheria)", "address": "Monte de Piedad 11, 1º andar, Centro Histórico"}]},
-        {time:"~13h30", activity:"Museu do Templo Mayor", detail:"Ruínas da cidade asteca de Tenochtitlán, ao lado da Catedral. Aberto até as 17h.", info:"Ingressos $210 - Compra na hora", restaurant:[{"name": "Café de Tacuba", "what": "restaurante histórico de comida mexicana tradicional, bom pra uma pausa de café e pan dulce", "address": "Tacuba 28, Centro Histórico"}]},
-        {time:"~15h", activity:"Museu do Palácio de Bellas Artes", detail:"Murais de Diego Rivera, Orozco e Siqueiros + prédio art nouveau/art déco icônico. Aberto até as 18h.", info:"Ingressos $95 - Compra na hora"},
-        {time:"Fim de tarde", activity:"Passeio livre pela região (Alameda Central, Casa de los Azulejos)", detail:"Livres para decidir onde querem ir.", restaurant:[{"name": "Casa de los Azulejos", "what": "Sanborns dentro de um palácio do séc. XVIII revestido de azulejos, bom pra um café ou lanche", "address": "Av. Francisco I. Madero 4, Centro Histórico"},{"name": "Churrería El Moro", "what": "churros tradicionais", "address": "Eje Central Lázaro Cárdenas 42, Centro Histórico"}]},
-        {time:"Fim de tarde", activity:"Volta para a hospedagem", detail:"Jantar em casa (opcional) e descanso."}
-      ]
-    },
-    {
       id:16, iso:"2026-10-31", weekday:"Sábado", dateLabel:"31 de outubro",
-      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"12h — horário e rota oficiais",
+      homeTitle:"Grande Desfile de Día de Muertos", homeSub:"14h — horário e rota oficiais",
       title:"Grande Desfile de Día de Muertos", accent:"green",
       subtitle:"É um desfile espetacular com carros alegóricos, caveiras gigantes, bonecos monumentais, acrobatas e milhares de participantes fantasiados.",
       schedule:[
         {time:"Manhã", activity:"Manhã livre", detail:"Se preferirem, fiquem por perto antes do desfile. Podem ir à feira de Coyoacán que fica mais longe da rota. Calculem pelo menos 40–50min de deslocamento até lá."},
-        {time:"10h30", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
-        {time:"11h", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
-        {time:"A partir das 12h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
+        {time:"12h", activity:"Deslocamento até a rota do desfile", detail:"Uber/metrô até Reforma — não deixem pra última hora, ruas fecham antes do início."},
+        {time:"12h30", activity:"Posicionar-se na rota", detail:"Reforma costuma ter mais espaço que o Zócalo, que fica bem lotado."},
+        {time:"A partir das 14h", activity:"Grande Desfile de Día de Muertos", detail:"Sai da Puerta de los Leones, no Bosque de Chapultepec, segue por Paseo de la Reforma até o Zócalo. Dura cerca de 4h. Leve protetor solar, chapéu e água — é bastante gente, e o dia é longo em pé."}
       ],
       notes:["Se decidirem pela feira em Coyoacán de manhã, o deslocamento até a rota do desfile é o ponto de atenção — são bairros bem distantes um do outro."]
     },
     {
       id:17, iso:"2026-11-01", weekday:"Domingo", dateLabel:"1 de novembro",
-      homeTitle:"Feira de miniaturas + Coyoacán", homeSub:"Bairros diferentes, ~25–30min",
-      title:"Feira de miniaturas + Coyoacán", accent:"red",
-      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, oferendas de Día de Muertos.",
+      homeTitle:"Feira de miniaturas + Feira de Chapultepec", homeSub:"Centro de manhã, Chapultepec à tarde",
+      title:"Feira de miniaturas + Feira de Chapultepec", accent:"red",
+      subtitle:"Feira especializada em brinquedos antigos, miniaturas e colecionáveis e depois, a Feria de Chapultepec.",
       schedule:[
         {time:"9h", activity:"Saída de casa"},
         {time:"9h30–13h", activity:"Feira de miniaturas (Tianguis de Balderas)", address:"Jardín Tolsa - Metro Balderas", detail:"Funciona sábados e domingos, geralmente 9h–17h. Entrada livre."},
         {time:"13h", activity:"Almoço no Centro", restaurant:[{"name": "Los Cocuyos", "what": "tacos de rua, no Guia Michelin", "address": "Calle Bolívar 57, Centro Histórico"}]},
-        {time:"14h", activity:"Deslocamento até Coyoacán", detail:"~25–30min de carro"},
-        {time:"14h30–17h30", activity:"Coyoacán: feira, ofrendas e ambiente de Día de Muertos", detail:"Jardín Centenario, Plaza Hidalgo e ruas ao redor costumam ter altares montados nesses dias — bom clima pra caminhar, ver a decoração e comer pan de muerto."},
+        {time:"14h", activity:"Deslocamento até Chapultepec", detail:"Do Centro até a 2ª Seção do Bosque de Chapultepec, calculem uns 20–30min de carro"},
+        {time:"14h30–17h30", activity:"Feira de Chapultepec", address:"Av. de los Compositores s/n, 2ª Seção do Bosque de Chapultepec", detail:"Parque de diversões dentro do Bosque de Chapultepec. Confirmar horário de domingo e valor dos ingressos antes de ir."},
         {time:"Final do dia", activity:"Volta para a hospedagem e noite livre", detail:"Jantar em casa (opcional) e descanso."}
       ]
     },
     {
       id:18, iso:"2026-11-02", weekday:"Segunda-feira", dateLabel:"2 de novembro",
-      homeTitle:"Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
-      title:"Panteón de San Gregorio", accent:"green",
+      homeTitle:"Manhã livre + Panteón de San Gregorio", homeSub:"Celebração tradicional no cemitério",
+      title:"Manhã livre + Panteón de San Gregorio", accent:"green",
       subtitle:"Comunidade tradicional com celebrações nos cemitérios, dia da despedida dos mortos.",
       schedule:[
-        {time:"8h", activity:"Sugestão: sair de casa para Toluca", detail:"Último dia da Feria del Alfeñique (3 de outubro a 2 de novembro), no centro de Toluca. Dá pra ir de Tren Interurbano (Observatorio → Toluca Centro, 90 pesos por pessoa) ou de carro. Depois fica longe pra ir direto pro Panteón de San Gregorio, então voltem pra hospedagem antes de sair pra Xochimilco."},
-        {time:"Na volta", activity:"Almoço livre", detail:"Se sobrar tempo antes de sair pra Xochimilco, escolham onde comer.", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
+        {time:"09h", activity:"Manhã e almoço livres", detail:"Escolham o que preferem fazer, onde preferem comer...", restaurant:[{"name": "Mimbre", "what": "panadería-restaurante artesanal, ótimo pra brunch, dentro da Privada Roja", "address": "Serapio Rendón 61, San Rafael (La Privada Roja)"},{"name": "El Califa de León", "what": "taquería com estrela Michelin", "address": "Av. Ribera de San Cosme 56, San Rafael"}]},
         {time:"15h", activity:"Saída de casa para Xochimilco", detail:"O horário aqui depende se querem ver os barcos neste dia ou não. Caso não queiram, é possível sair mais tarde."},
         {time:"16h", activity:"Chegada em Xochimilco", detail:"Canais com barcos prontos para a noite iluminada, podem escolher algo para comer e ver o bairro no Día de Muertos."},
         {time:"18h", activity:"Vigília no Panteón de San Gregorio", detail:"Tradição de velas e flores de cempasúchil nas covas, para despedida dos mortos."},
@@ -705,13 +701,14 @@
     },
     {
       id:20, iso:"2026-11-04", weekday:"Quarta-feira", dateLabel:"4 de novembro",
-      homeTitle:"Soumaya + Retorno Carou e Vine", homeSub:"Dia livre — depois, aeroporto às 22h",
+      homeTitle:"Soumaya + Retorno Carou e Vine", homeSub:"Dia livre — depois, saída pro aeroporto às 21h",
       title:"Soumaya + Retorno Carou e Vine", accent:"green",
       subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h — à noite é hora de ir pro aeroporto.",
       schedule:[
         {time:"Dia livre", activity:"Manhã e início da tarde sem compromisso", detail:"Descansar, compras de última hora, ou voltar em algum lugar para conhecer outros pontos."},
         {time:"Após 15h (opcional)", activity:"Museu Soumaya", detail:"Gratuito, sem ingresso. Aberto todos os dias, aproximadamente 10h30–18h30. Fica na Plaza Carso, dá pra ir a pé ou de carro rapidinho.", restaurant:[{"name": "Shake Shack", "what": "hamburgueria", "address": "Av. Ejército Nacional 769, Miyana, Granada (perto do Soumaya)"}]},
-        {time:"22h", activity:"Saída para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."}
+        {time:"21h", activity:"Saída de casa para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."},
+        {time:"22h", activity:"Estar no aeroporto e despachar as malas", detail:"Voo à 01h da madrugada do dia 05/11."}
       ]
     },
     {
@@ -737,9 +734,10 @@
   }
 
   var VINE_DAYS = withDayAddition(DEFAULT_DAYS, 11, [
-    {time:"22h", activity:"Saída para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."}
+    {time:"21h", activity:"Saída de casa para o aeroporto", detail:"Voo de volta é 01h da madrugada (já dia 05/11) — saiam com folga."},
+    {time:"22h", activity:"Estar no aeroporto e despachar as malas", detail:"Voo à 01h da madrugada do dia 05/11."}
   ], {
-    homeSub:"Dia livre — depois, aeroporto às 22h",
+    homeSub:"Dia livre — depois, saída pro aeroporto às 21h",
     subtitle:"Dia livre, o Soumaya fica como passeio opcional pra depois das 15h — à noite é hora de ir pro aeroporto."
   }).concat([
     {
